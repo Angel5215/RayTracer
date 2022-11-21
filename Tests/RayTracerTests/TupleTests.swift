@@ -42,4 +42,15 @@ class TupleTests: XCTestCase {
         XCTAssertEqual(tuple.z, 3)
         XCTAssertEqual(tuple.w, 0)
     }
+
+    func test_adding_makesTupleByAddingCorrespondingComponentsOfTuples() {
+        let tuple1 = Tuple(x: 3, y: -2, z: 5, w: 1)
+        let tuple2 = Tuple(x: -2, y: 3, z: 1, w: 0)
+
+        let result = tuple1 + tuple2
+
+        XCTAssertEqual(result, Tuple(x: 1, y: 1, z: 6, w: 1))
+    }
+
+
 }

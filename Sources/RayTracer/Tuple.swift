@@ -28,3 +28,16 @@ extension Tuple {
         Tuple(x: x, y: y, z: z, w: 0)
     }
 }
+
+extension Tuple: Equatable {}
+
+extension Tuple {
+    public static func +(lhs: Tuple, rhs: Tuple) -> Tuple {
+        Tuple(
+            x: lhs.x + rhs.x,
+            y: lhs.y + rhs.y,
+            z: lhs.z + rhs.z,
+            w: lhs.w + rhs.w
+        )
+    }
+}
