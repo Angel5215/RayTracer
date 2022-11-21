@@ -11,6 +11,24 @@ public struct Tuple {
         self.z = z
         self.w = w
     }
+
+    public func adding(_ tuple: Tuple) -> Tuple {
+        Tuple(
+            x: x + tuple.x,
+            y: y + tuple.y,
+            z: z + tuple.z,
+            w: w + tuple.w
+        )
+    }
+
+    public func subtracting(_ tuple: Tuple) -> Tuple {
+        Tuple(
+            x: x - tuple.x,
+            y: y - tuple.y,
+            z: z - tuple.z,
+            w: w - tuple.w
+        )
+    }
 }
 
 extension Tuple {
@@ -33,20 +51,10 @@ extension Tuple: Equatable {}
 
 extension Tuple {
     public static func +(lhs: Tuple, rhs: Tuple) -> Tuple {
-        Tuple(
-            x: lhs.x + rhs.x,
-            y: lhs.y + rhs.y,
-            z: lhs.z + rhs.z,
-            w: lhs.w + rhs.w
-        )
+        lhs.adding(rhs)
     }
 
     public static func -(lhs: Tuple, rhs: Tuple) -> Tuple {
-        Tuple(
-            x: lhs.x - rhs.x,
-            y: lhs.y - rhs.y,
-            z: lhs.z - rhs.z,
-            w: lhs.w - rhs.w
-        )
+        lhs.subtracting(rhs)
     }
 }
