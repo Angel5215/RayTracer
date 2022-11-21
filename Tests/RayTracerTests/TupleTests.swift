@@ -24,4 +24,22 @@ class TupleTests: XCTestCase {
         XCTAssertFalse(tuple.isPoint)
         XCTAssertTrue(tuple.isVector)
     }
+    
+    func test_point_createsPoint() {
+        let tuple = Tuple.point(x: 4, y: -4, z: 3)
+        
+        XCTAssertEqual(tuple.x, 4)
+        XCTAssertEqual(tuple.y, -4)
+        XCTAssertEqual(tuple.z, 3)
+        XCTAssertEqual(tuple.w, 1)
+    }
+
+    func test_vector_createsVector() {
+        let tuple = Tuple.vector(x: 4, y: -4, z: 3)
+
+        XCTAssertEqual(tuple.x, 4)
+        XCTAssertEqual(tuple.y, -4)
+        XCTAssertEqual(tuple.z, 3)
+        XCTAssertEqual(tuple.w, 0)
+    }
 }
