@@ -40,4 +40,13 @@ extension Tuple {
             w: lhs.w + rhs.w
         )
     }
+
+    public static func -(lhs: Tuple, rhs: Tuple) -> Tuple {
+        Tuple(
+            x: lhs.x - rhs.x,
+            y: lhs.y - rhs.y,
+            z: lhs.z - rhs.z,
+            w: lhs.w - rhs.w
+        )
+    }
 }
