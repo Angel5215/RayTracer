@@ -81,6 +81,14 @@ class TupleTests: XCTestCase {
         XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
     }
 
+    func test_negate_negatesEachComponentOfTuple() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let result = tuple.negated()
+
+        XCTAssertEqual(result, Tuple(x: -1, y: 2, z: -3, w: 4))
+    }
+
     // MARK: - Operations with operators
 
     func test_addingWithOperator_generatesCorrectResults() {
@@ -126,5 +134,13 @@ class TupleTests: XCTestCase {
         let result = zero - vector
 
         XCTAssertEqual(result, Tuple.vector(x: -1, y: 2, z: -3))
+    }
+
+    func test_negate_generatesCorrectResults() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let result = tuple.negated()
+
+        XCTAssertEqual(result, Tuple(x: -1, y: 2, z: -3, w: 4))
     }
 }

@@ -20,4 +20,8 @@ extension Tuple {
             w: w - tuple.w
         )
     }
+
+    public func negated() -> Tuple {
+        Tuple(x: -x, y: -y, z: -z, w: -w)
+    }
 }

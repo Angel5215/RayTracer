@@ -10,4 +10,8 @@ extension Tuple {
     public static func -(lhs: Tuple, rhs: Tuple) -> Tuple {
         lhs.subtracting(rhs)
     }
+
+    public static prefix func -(tuple: Tuple) -> Tuple {
+        tuple.negated()
+    }
 }
