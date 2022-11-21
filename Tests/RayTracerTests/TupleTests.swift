@@ -60,4 +60,22 @@ class TupleTests: XCTestCase {
 
         XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
     }
+
+    func test_subtractingVectorFromPoint_subtractsCorrespondingElementsOfTuples() {
+        let tuple1 = Tuple.point(x: 3, y: 2, z: 1)
+        let tuple2 = Tuple.vector(x: 5, y: 6, z: 7)
+
+        let result = tuple1 - tuple2
+
+        XCTAssertEqual(result, Tuple.point(x: -2, y: -4, z: -6))
+    }
+
+    func test_subtractingVectors_subtractsCorrespondingElementsOfTuples() {
+        let tuple1 = Tuple.vector(x: 3, y: 2, z: 1)
+        let tuple2 = Tuple.vector(x: 5, y: 6, z: 7)
+
+        let result = tuple1 - tuple2
+
+        XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
+    }
 }
