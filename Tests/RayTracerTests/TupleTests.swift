@@ -118,4 +118,13 @@ class TupleTests: XCTestCase {
 
         XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
     }
+
+    func test_negate_bySubtractingFromVectorZero() {
+        let zero = Tuple.vector(x: 0, y: 0, z: 0)
+        let vector = Tuple.vector(x: 1, y: -2, z: 3)
+
+        let result = zero - vector
+
+        XCTAssertEqual(result, Tuple.vector(x: -1, y: 2, z: -3))
+    }
 }
