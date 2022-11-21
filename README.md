@@ -1,5 +1,7 @@
 # RayTracer
 
+<img align="center" src="https://github.com/Angel5215/RayTracer/workflows/ci/badge.svg" alt="Build Status"/>
+
 This repository contains the source code for my attempt at building a **ray tracer** while following [The Ray Tracer Challenge](http://raytracerchallenge.com/).
 
 The challenge allows the ray tracer to be implemented on any programming language and environment so I chose Swift. 
