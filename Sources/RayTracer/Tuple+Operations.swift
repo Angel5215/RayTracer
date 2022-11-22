@@ -24,4 +24,13 @@ extension Tuple {
     public func negated() -> Tuple {
         Tuple(x: -x, y: -y, z: -z, w: -w)
     }
+
+    public func multiplied(by scalar: Double) -> Tuple {
+        Tuple(
+            x: x * scalar,
+            y: y * scalar,
+            z: z * scalar,
+            w: w * scalar
+        )
+    }
 }

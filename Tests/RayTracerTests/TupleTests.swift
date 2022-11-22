@@ -89,6 +89,22 @@ class TupleTests: XCTestCase {
         XCTAssertEqual(result, Tuple(x: -1, y: 2, z: -3, w: 4))
     }
 
+    func test_multipliedByScalar_scalesTupleComponents() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let result = tuple.multiplied(by: 3.5)
+
+        XCTAssertEqual(result, Tuple(x: 3.5, y: -7, z: 10.5, w: -14))
+    }
+
+    func test_multipliedByFraction_scalesTupleComponents() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let result = tuple.multiplied(by: 0.5)
+
+        XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
+    }
+
     // MARK: - Operations with operators
 
     func test_addingWithOperator_generatesCorrectResults() {
