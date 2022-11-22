@@ -159,4 +159,37 @@ class TupleTests: XCTestCase {
 
         XCTAssertEqual(result, Tuple(x: -1, y: 2, z: -3, w: 4))
     }
+
+    func test_multipliedByScalarWithOperator_generatesCorrectResults() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let resultRight = tuple * 3.5
+        let resultLeft = 3.5 * tuple
+
+        XCTAssertEqual(resultRight, Tuple(x: 3.5, y: -7, z: 10.5, w: -14))
+        XCTAssertEqual(resultLeft, Tuple(x: 3.5, y: -7, z: 10.5, w: -14))
+    }
+
+    func test_multipliedByFractionWithOperator_generatesCorrectResults() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let resultRight = tuple * 0.5
+        let resultLeft = 0.4 * tuple
+
+        XCTAssertEqual(resultRight, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
+        XCTAssertEqual(resultLeft, Tuple(x: 0.4, y: -0.8, z: 1.2, w: -1.6))
+    }
+
+    func test_equality_considersTwoTuplesEqualWhenTheirDifferenceIsLessThan1e_6() {
+        let samples = [
+            Tuple(x: 1.690_000_9, y: 3.520_000_9, z: 3.120_000_9, w: 6.920_000_9),
+            Tuple(x: 1.69, y: 3.52, z: 3.12, w: 6.92),
+            Tuple(x: 1.689_999_1, y: 3.519_999_1, z: 3.119_999_1, w: 6.919_999_1),
+        ]
+        let tuple = Tuple(x: 1.69, y: 3.52, z: 3.12, w: 6.92)
+
+        samples.forEach { sample in
+            XCTAssertEqual(tuple, sample, "Tuples should be equal when their difference is less than 1E-6 (0.000001)")
+        }
+    }
 }

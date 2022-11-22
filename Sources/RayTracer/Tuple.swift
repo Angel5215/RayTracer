@@ -1,5 +1,5 @@
 
-public struct Tuple: Equatable {
+public struct Tuple {
     public let x: Double
     public let y: Double
     public let z: Double
@@ -13,5 +13,15 @@ public struct Tuple: Equatable {
         self.y = y
         self.z = z
         self.w = w
+    }
+}
+
+extension Tuple: Equatable {
+    public static func ==(lhs: Tuple, rhs: Tuple) -> Bool {
+        let epsilon = 0.000_001
+        let isXEqual = abs(lhs.x - rhs.x) <= epsilon
+        let isYEqual = abs(lhs.y - rhs.y) <= epsilon
+        let isZEqual = abs(lhs.z - rhs.z) <= epsilon
+        return isXEqual && isYEqual && isZEqual
     }
 }

@@ -14,4 +14,14 @@ extension Tuple {
     public static prefix func -(tuple: Tuple) -> Tuple {
         tuple.negated()
     }
+
+    // MARK: - Multiplication by a scalar
+
+    public static func *(lhs: Tuple, rhs: Double) -> Tuple {
+        lhs.multiplied(by: rhs)
+    }
+
+    public static func *(lhs: Double, rhs: Tuple) -> Tuple {
+        rhs.multiplied(by: lhs)
+    }
 }
