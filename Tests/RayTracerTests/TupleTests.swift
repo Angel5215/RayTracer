@@ -236,4 +236,12 @@ class TupleTests: XCTestCase {
         let normalized2 = vector2.normalized()
         XCTAssertEqual(normalized2, Tuple.vector(x: 0.26726, y: 0.53452, z: 0.80178))
     }
+
+    func test_magnitude_ofNormalizedVectorIsOne() {
+        let vector = Tuple.vector(x: 1, y: 2, z: 3)
+
+        let normalizedMagnitude = vector.normalized().magnitude
+
+        XCTAssertEqual(normalizedMagnitude, 1.0)
+    }
 }
