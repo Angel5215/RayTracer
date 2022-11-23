@@ -1,6 +1,7 @@
 //
 // Created by Ángel Vázquez on 21/11/22.
 //
+import Foundation
 
 extension Tuple {
     public func adding(_ tuple: Tuple) -> Tuple {
@@ -36,5 +37,9 @@ extension Tuple {
 
     public func divided(by scalar: Double) -> Tuple {
         multiplied(by: 1 / scalar)
+    }
+
+    public var magnitude: Double {
+        (x * x + y * y + z * z + w * w).squareRoot()
     }
 }
