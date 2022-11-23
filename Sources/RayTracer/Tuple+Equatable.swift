@@ -10,7 +10,7 @@ extension Tuple: Equatable {
         return isXEqual && isYEqual && isZEqual
     }
 
-    private static func isAlmostEqual(lhs: Double, rhs: Double, epsilon: Double = 1e-6) -> Bool {
+    private static func isAlmostEqual(lhs: Double, rhs: Double, epsilon: Double = 1e-5) -> Bool {
         abs(lhs - rhs) < epsilon
     }
 }
