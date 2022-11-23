@@ -33,4 +33,8 @@ extension Tuple {
             w: w * scalar
         )
     }
+
+    public func divided(by scalar: Double) -> Tuple {
+        multiplied(by: 1 / scalar)
+    }
 }

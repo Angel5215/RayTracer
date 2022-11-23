@@ -24,4 +24,8 @@ extension Tuple {
     public static func *(lhs: Double, rhs: Tuple) -> Tuple {
         rhs.multiplied(by: lhs)
     }
+
+    public static func /(lhs: Tuple, rhs: Double) -> Tuple {
+        lhs.divided(by: rhs)
+    }
 }

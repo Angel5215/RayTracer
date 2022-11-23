@@ -105,6 +105,14 @@ class TupleTests: XCTestCase {
         XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
     }
 
+    func test_dividedByFactor_scalesTupleComponents() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let result = tuple.divided(by: 2)
+
+        XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
+    }
+
     // MARK: - Operations with operators
 
     func test_addingWithOperator_generatesCorrectResults() {
@@ -178,6 +186,14 @@ class TupleTests: XCTestCase {
 
         XCTAssertEqual(resultRight, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
         XCTAssertEqual(resultLeft, Tuple(x: 0.4, y: -0.8, z: 1.2, w: -1.6))
+    }
+
+    func test_dividedByScalarWithOperator_scalesTupleComponents() {
+        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+
+        let result = tuple / 2
+
+        XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
     }
 
     func test_equality_considersTwoTuplesEqualWhenTheirDifferenceIsLessThan1e_6() {
