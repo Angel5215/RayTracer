@@ -196,7 +196,7 @@ class TupleTests: XCTestCase {
         XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
     }
 
-    func test_equality_considersTwoTuplesEqualWhenTheirDifferenceIsLessThan1e_6() {
+    func test_equality_considersTwoTuplesEqualWhenTheirDifferenceIsLessThanSomeEpsilonValue() {
         let samples = [
             Tuple(x: 1.690_009, y: 3.520_009, z: 3.120_009, w: 6.920_009),
             Tuple(x: 1.69, y: 3.52, z: 3.12, w: 6.92),
