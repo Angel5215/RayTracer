@@ -42,4 +42,8 @@ extension Tuple {
     public var magnitude: Double {
         (x * x + y * y + z * z + w * w).squareRoot()
     }
+
+    public func normalized() -> Tuple {
+        self / magnitude
+    }
 }
