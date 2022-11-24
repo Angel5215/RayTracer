@@ -253,4 +253,16 @@ class TupleTests: XCTestCase {
 
         XCTAssertEqual(dotProduct, 20.0)
     }
+
+    func test_crossProduct_returnsNewVector() {
+        let vector1 = Tuple.vector(x: 1, y: 2, z: 3)
+        let vector2 = Tuple.vector(x: 2, y: 3, z: 4)
+
+        let result1 = vector1.crossProduct(with: vector2)
+        let result2 = vector2.crossProduct(with: vector1)
+
+        XCTAssertEqual(result1, Tuple.vector(x: -1, y: 2, z: -1))
+        XCTAssertEqual(result2, Tuple.vector(x: 1, y: -2, z: 1))
+    }
 }
+

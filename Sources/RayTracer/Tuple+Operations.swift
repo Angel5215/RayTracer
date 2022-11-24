@@ -50,4 +50,12 @@ extension Tuple {
     public func dotProduct(with tuple: Tuple) -> Double {
         x * tuple.x + y * tuple.y + z * tuple.z + w * tuple.z
     }
+
+    public func crossProduct(with tuple: Tuple) -> Tuple {
+        Tuple.vector(
+            x: y * tuple.z - z * tuple.y,
+            y: z * tuple.x - x * tuple.z,
+            z: x * tuple.y - y * tuple.x
+        )
+    }
 }
