@@ -5,16 +5,12 @@
 import Foundation
 import RayTracer
 
-typealias Point = Tuple
-typealias Vector = Tuple
-
-let point = Tuple.point
-let vector = Tuple.vector
-
-struct Projectile: CustomStringConvertible {
+struct Projectile {
     let position: Point
     let velocity: Vector
+}
 
+extension Projectile: CustomStringConvertible {
     private static let formatter = {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 4
@@ -27,9 +23,4 @@ struct Projectile: CustomStringConvertible {
         y: \(Self.formatter.string(from: NSNumber(value: position.y))!))
         """
     }
-}
-
-struct Environment {
-    let gravity: Vector
-    let wind: Vector
 }
