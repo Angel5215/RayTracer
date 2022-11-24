@@ -244,4 +244,13 @@ class TupleTests: XCTestCase {
 
         XCTAssertEqual(normalizedMagnitude, 1.0)
     }
+
+    func test_dotProduct_returnsScalarValue() {
+        let vector1 = Tuple.vector(x: 1, y: 2, z: 3)
+        let vector2 = Tuple.vector(x: 2, y: 3, z: 4)
+
+        let dotProduct = vector1.dotProduct(with: vector2)
+
+        XCTAssertEqual(dotProduct, 20.0)
+    }
 }

@@ -46,4 +46,8 @@ extension Tuple {
     public func normalized() -> Tuple {
         self / magnitude
     }
+
+    public func dotProduct(with tuple: Tuple) -> Double {
+        x * tuple.x + y * tuple.y + z * tuple.z + w * tuple.z
+    }
 }
