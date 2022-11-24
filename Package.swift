@@ -8,6 +8,10 @@ let package = Package(
         .library(
             name: "RayTracer",
             targets: ["RayTracer"]
+        ),
+        .executable(
+            name: "Projectiles",
+            targets: ["Projectiles"]
         )
     ],
     dependencies: [],
@@ -16,9 +20,13 @@ let package = Package(
             name: "RayTracer",
             dependencies: []
         ),
+        .target(
+            name: "Projectiles",
+            dependencies: ["RayTracer"]
+        ),
         .testTarget(
             name: "RayTracerTests",
             dependencies: ["RayTracer"]
-        )
+        ),
     ]
 )
