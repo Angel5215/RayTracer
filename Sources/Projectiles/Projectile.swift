@@ -13,14 +13,16 @@ struct Projectile {
 extension Projectile: CustomStringConvertible {
     private static let formatter = {
         let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 4
+        formatter.maximumFractionDigits = 6
         return formatter
     }()
 
     var description: String {
         """
-        (x: \(Self.formatter.string(from: NSNumber(value: position.x))!), \
-        y: \(Self.formatter.string(from: NSNumber(value: position.y))!))
+        (\
+        x: \(Self.formatter.string(from: NSNumber(value: position.x))!), \
+        y: \(Self.formatter.string(from: NSNumber(value: position.y))!)\
+        )
         """
     }
 }
