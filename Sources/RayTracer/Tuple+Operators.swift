@@ -28,4 +28,12 @@ extension Tuple {
     public static func /(lhs: Tuple, rhs: Double) -> Tuple {
         lhs.divided(by: rhs)
     }
+
+    public static func •(lhs: Tuple, rhs: Tuple) -> Double {
+        lhs.dotProduct(with: rhs)
+    }
+
+    public static func ⨯(lhs: Tuple, rhs: Tuple) -> Tuple {
+        lhs.crossProduct(with: rhs)
+    }
 }
