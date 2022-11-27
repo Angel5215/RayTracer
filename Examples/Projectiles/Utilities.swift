@@ -6,12 +6,6 @@ import ArgumentParser
 import Foundation
 import RayTracer
 
-typealias Point = Tuple
-typealias Vector = Tuple
-
-let point = Tuple.point
-let vector = Tuple.vector
-
 // Represents a 2D tuple passed as an argument to this command
 struct Tuple2D: ExpressibleByArgument {
     let x: Double

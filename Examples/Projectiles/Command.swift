@@ -28,13 +28,13 @@ struct Command: ParsableCommand {
         formatter.maximumFractionDigits = maximumFractionDigits
 
         var projectile = Projectile(
-            position: point(position.x, position.y, 0),
-            velocity: vector(velocity.x, velocity.y, 0).normalized()
+            position: point(x: position.x, y: position.y, z: 0),
+            velocity: vector(x: velocity.x, y: velocity.y, z: 0).normalized()
         )
 
         let environment = Environment(
-            gravity: vector(gravity.x, gravity.y, 0),
-            wind: vector(wind.x, wind.y, 0)
+            gravity: vector(x: gravity.x, y: gravity.y, z: 0),
+            wind: vector(x: wind.x, y: wind.y, z: 0)
         )
 
         reportStatus(of: projectile, using: formatter)
