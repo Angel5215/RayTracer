@@ -3,6 +3,7 @@
 //
 
 import ArgumentParser
+import Foundation
 import RayTracer
 
 typealias Point = Tuple
@@ -17,8 +18,11 @@ struct Tuple2D: ExpressibleByArgument {
     let y: Double
 
     init?(argument: String) {
-        print(argument)
-        let valueArray = argument.split(separator: ",").compactMap(Double.init)
+        let valueArray = argument
+            .trimmingCharacters(in: .alphanumerics.inverted)
+            .split(separator: ",")
+            .compactMap(Double.init)
+
         guard valueArray.count == 2 else { return nil }
         self.x = valueArray[0]
         self.y = valueArray[1]

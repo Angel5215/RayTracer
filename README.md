@@ -44,14 +44,14 @@ To test these in action, a sample CLI tool can be run to play a simulation of fi
 
 ```bash
 # Using short names for options
-swift run projectiles -p '0,1' -v '1,1' -g '0,-0.1' -w '-0.01,0'
+swift run projectiles -p '(0,1)' -v '(1,1)' -g '(0,-0.1)' -w '(-0.01,0)'
 
 # Using long names
-swift run projectiles --position '0,1' --velocity '1,1' --gravity '0,-0.1' --wind '-0.01,0'
+swift run projectiles --position '(0,1)' --velocity '(1,1)' --gravity '(0,-0.1)' --wind '(-0.01,0)'
 
 # Show help information (-h / --help)
 swift run projectiles -h
 
 # Showing an specific amount of maximum fraction digits (by default this parameter is 4)
-swift run projectiles -p '0,1' -v '1,1' -g '0,-0.1' -w '-0.01,0' --maximum-fraction-digits 6
+swift run projectiles -p '(0,1)' -v '(1,1)' -g '(0,-0.1)' -w '(-0.01,0)' --maximum-fraction-digits 6
 ```
