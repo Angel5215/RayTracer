@@ -19,7 +19,7 @@ let package = Package(
             dependencies: []
         ),
         .executableTarget(
-            name: "Projectiles",
+            name: "projectiles",
             dependencies: [
                 "RayTracer",
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
