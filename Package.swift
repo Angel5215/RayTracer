@@ -8,21 +8,23 @@ let package = Package(
         .library(
             name: "RayTracer",
             targets: ["RayTracer"]
-        ),
-        .executable(
-            name: "Projectiles",
-            targets: ["Projectiles"]
         )
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0")
+    ],
     targets: [
         .target(
             name: "RayTracer",
             dependencies: []
         ),
-        .target(
+        .executableTarget(
             name: "Projectiles",
-            dependencies: ["RayTracer"]
+            dependencies: [
+                "RayTracer",
+                .product(name: "ArgumentParser", package: "swift-argument-parser")
+            ],
+            path: "Examples/Projectiles"
         ),
         .testTarget(
             name: "RayTracerTests",
