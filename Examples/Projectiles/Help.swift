@@ -9,8 +9,8 @@ enum Help {
         ArgumentHelp(stringLiteral:
         """
         The starting point of the projectile. This value should be passed as a tuple \
-        of two elements inside parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. (3.59,-15.39).
+        of two elements inside single quotes, separated by a comma without spaces. \
+        Values are allowed to be negative numbers e.g. '3.59,-15.39'.
         """)
     }
 
@@ -18,8 +18,8 @@ enum Help {
         ArgumentHelp(stringLiteral:
         """
         The velocity vector of the projectile. This value should be passed as a tuple \
-        of two elements inside parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. (3.59,-15.39).
+        of two elements inside single quotes, separated by a comma without spaces. \
+        Values are allowed to be negative numbers e.g. '3.59,-15.39'.
         """)
     }
 
@@ -27,8 +27,8 @@ enum Help {
         ArgumentHelp(stringLiteral:
         """
         The gravity vector of the environment. This value should be passed as a tuple \
-        of two elements inside parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. (3.59,-15.39).
+        of two elements inside single quotes, separated by a comma without spaces. \
+        Values are allowed to be negative numbers e.g. '3.59,-15.39'.
         """)
     }
 
@@ -36,8 +36,8 @@ enum Help {
         ArgumentHelp(stringLiteral:
         """
         The wind vector of the environment. This value should be passed as a tuple \
-        of two elements inside parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. (3.59,-15.39).
+        of two elements inside single quotes, separated by a comma without spaces. \
+        Values are allowed to be negative numbers e.g. '3.59,-15.39'.
         """)
     }
 

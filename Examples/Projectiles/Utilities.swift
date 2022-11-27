@@ -17,11 +17,8 @@ struct Tuple2D: ExpressibleByArgument {
     let y: Double
 
     init?(argument: String) {
-        let valueArray = argument
-        .replacingOccurrences(of: "(", with: "")
-        .replacingOccurrences(of: ")", with: "")
-        .split(separator: ",")
-        .compactMap(Double.init)
+        print(argument)
+        let valueArray = argument.split(separator: ",").compactMap(Double.init)
         guard valueArray.count == 2 else { return nil }
         self.x = valueArray[0]
         self.y = valueArray[1]
