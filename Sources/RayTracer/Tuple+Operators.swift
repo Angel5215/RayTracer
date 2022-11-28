@@ -36,4 +36,9 @@ public extension Tuple {
     static func ⨯(lhs: Tuple, rhs: Tuple) -> Tuple {
         lhs.crossProduct(with: rhs)
     }
+
+    // MARK: - Color specific
+    static func *(lhs: Tuple, rhs: Tuple) -> Tuple {
+        lhs.hadamardProduct(with: rhs)
+    }
 }

@@ -58,4 +58,19 @@ public extension Tuple {
             z: x * tuple.y - y * tuple.x
         )
     }
+
+    // MARK: - Color specific
+
+    /// Also known as Schur product.
+    ///
+    /// - Parameter tuple: The tuple to multiply with this one.
+    /// - Returns: A new tuple multiplying corresponding components of this tuple to form the new tuple.
+    func hadamardProduct(with tuple: Tuple) -> Tuple {
+        Tuple(
+            x: x * tuple.x,
+            y: y * tuple.y,
+            z: z * tuple.z,
+            w: w * tuple.w
+        )
+    }
 }

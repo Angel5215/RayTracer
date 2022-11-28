@@ -36,7 +36,7 @@ class ColorTests: XCTestCase {
         XCTAssertEqual(result2, color(red: 0.2, green: 0.5, blue: 0.5))
     }
 
-    func test_multiplyingWithScalar_createsNewColorMultiplyingEachComponentByTheScalar() {
+    func test_multipliedWithScalar_createsNewColorMultiplyingEachComponentByTheScalar() {
         let color = Tuple.color(red: 0.2, green: 0.3, blue: 0.4)
 
         let result1 = 2 * color
@@ -44,5 +44,16 @@ class ColorTests: XCTestCase {
 
         XCTAssertEqual(result1, Tuple.color(red: 0.4, green: 0.6, blue: 0.8))
         XCTAssertEqual(result2, Tuple.color(red: 0.4, green: 0.6, blue: 0.8))
+    }
+
+    func test_hadamardProduct_createsNewColorMultiplyingEachColorComponent() {
+        let color1 = color(red: 1, green: 0.2, blue: 0.4)
+        let color2 = color(red: 0.9, green: 1, blue: 0.1)
+
+        let result1 = color1.hadamardProduct(with: color2)
+        let result2 = color1 * color2
+
+        XCTAssertEqual(result1, color(red: 0.9, green: 0.2, blue: 0.04))
+        XCTAssertEqual(result2, color(red: 0.9, green: 0.2, blue: 0.04))
     }
 }
