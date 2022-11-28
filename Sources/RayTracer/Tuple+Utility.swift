@@ -6,11 +6,11 @@ public typealias Point = Tuple
 public typealias Vector = Tuple
 public typealias Color = Tuple
 
-public func point(x: Double, y: Double, z: Double) -> Tuple {
+public func point(x: Double, y: Double, z: Double) -> Point {
     Tuple.point(x: x, y: y, z: z)
 }
 
-public func vector(x: Double, y: Double, z: Double) -> Tuple {
+public func vector(x: Double, y: Double, z: Double) -> Vector {
     Tuple.vector(x: x, y: y, z: z)
 }
 
