@@ -37,7 +37,7 @@ class CanvasTests: XCTestCase {
 
         for y in 0..<height {
             for x in 0..<width {
-                XCTAssertEqual(canvas.pixels[y][x], .black, "Color is not black at position (\(x), \(y))")
+                XCTAssertEqual(canvas.pixel(at: (x: x, y: y)), .black, "Color is not black at position (\(x), \(y))")
             }
         }
     }
