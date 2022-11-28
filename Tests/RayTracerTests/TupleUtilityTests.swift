@@ -21,4 +21,12 @@ class TupleUtilityTests: XCTestCase {
         XCTAssertTrue(tuple.isVector)
         XCTAssertFalse(tuple.isPoint)
     }
+
+    func test_color_makesColorTuple() {
+        let tuple = color(red: -0.5, green: 0.4, blue: 1.7)
+
+        XCTAssertEqual(tuple.red, -0.5)
+        XCTAssertEqual(tuple.green, 0.4)
+        XCTAssertEqual(tuple.blue, 1.7)
+    }
 }
