@@ -56,4 +56,12 @@ class ColorTests: XCTestCase {
         XCTAssertEqual(result1, color(red: 0.9, green: 0.2, blue: 0.04))
         XCTAssertEqual(result2, color(red: 0.9, green: 0.2, blue: 0.04))
     }
+
+    func test_black_hasAllComponentsInZero() {
+        let black = Color.black
+
+        XCTAssertEqual(black.red, 0)
+        XCTAssertEqual(black.green, 0)
+        XCTAssertEqual(black.blue, 0)
+    }
 }

@@ -17,3 +17,7 @@ public func vector(x: Double, y: Double, z: Double) -> Vector {
 public func color(red: Double, green: Double, blue: Double) -> Color {
     Tuple.color(red: red, green: green, blue: blue)
 }
+
+public extension Color {
+    static var black: Color { color(red: 0, green: 0, blue: 0) }
+}
