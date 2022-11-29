@@ -22,8 +22,9 @@ struct Canvas {
         pixels[position.y][position.x] = color
     }
 
-    func pixel(at position: Canvas.Position) -> Color {
-        pixels[position.y][position.x]
+    func pixel(at position: Canvas.Position) -> Color? {
+        guard position.x >= 0, position.y >= 0, position.x < width, position.y < height else { return nil }
+        return pixels[position.y][position.x]
     }
 
     var ppm: String {
@@ -154,6 +155,15 @@ class CanvasTests: XCTestCase {
                 XCTAssertEqual(canvas.pixel(at: (x: x, y: y)), .black, "Color is not black at position (\(x), \(y))")
             }
         }
+    }
+
+    func test_pixelAtPosition_returnsNilForPositionsOutsideCanvasBounds() {
+        let canvas = Canvas(width: 5, height: 3)
+
+        XCTAssertNil(canvas.pixel(at: (x: -1, y: 9)))
+        XCTAssertNil(canvas.pixel(at: (x: 6, y: 2)))
+        XCTAssertNil(canvas.pixel(at: (x: 3, y: 4)))
+        XCTAssertNotNil(canvas.pixel(at: (x: 1, y: 2)))
     }
 }
 
