@@ -55,16 +55,18 @@ struct Canvas {
         guard longLine.count > offset else { return [longLine] }
         let startIndex = longLine.startIndex
         let index = longLine.index(startIndex, offsetBy: offset)
-        if longLine[index] == " " {
-            return [longLine[startIndex..<index], longLine[index...]]
-                        .map(String.init)
-                        .map { $0.trimmingCharacters(in: .whitespaces) }
+        let space: Character = " "
+        let newLines: [Substring]
+
+        if longLine[index] == space {
+            newLines = [longLine[startIndex..<index], longLine[index...]]
         } else {
-            let spaceIndex = longLine[startIndex..<index].lastIndex { $0 == " " }!
-            return [longLine[startIndex..<spaceIndex], longLine[spaceIndex...]]
-                        .map(String.init)
-                        .map { $0.trimmingCharacters(in: .whitespaces) }
+            // Substring is guaranteed to have at least one space
+            let spaceIndex = longLine[startIndex..<index].lastIndex { $0 == space }!
+            newLines = [longLine[startIndex..<spaceIndex], longLine[spaceIndex...]]
         }
+
+        return newLines.map(String.init).map { $0.trimmingCharacters(in: .whitespaces) }
     }
 }
 
