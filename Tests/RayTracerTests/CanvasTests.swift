@@ -11,10 +11,10 @@ struct Canvas {
     let height: Int
     var pixels: [[Color]]
 
-    init(width: Int, height: Int) {
+    init(width: Int, height: Int, fillColor: Color = .black) {
         self.width = width
         self.height = height
-        self.pixels = [[Color]](repeating: [Color](repeating: .black, count: width), count: height)
+        self.pixels = [[Color]](repeating: [Color](repeating: fillColor, count: width), count: height)
     }
 
     mutating func writePixel(with color: Color, at position: Canvas.Position) {
@@ -31,15 +31,16 @@ struct Canvas {
         \(width) \(height)
         255
         """
+        .appending("\n")
         .appending(constructPixelData())
     }
 
     private func constructPixelData() -> String {
-        var pixelData = "\n"
+        var pixelData = [String]()
         for row in pixels {
-            pixelData += row.map(string).joined(separator: " ") + "\n"
+            pixelData.append(row.map(string).joined(separator: " ").trimmingCharacters(in: .whitespaces))
         }
-        return pixelData
+        return pixelData.flatMap(split).joined(separator: "\n")
     }
 
     private func string(from color: Color) -> String {
@@ -47,6 +48,23 @@ struct Canvas {
         let g = max(0, min(Int(round(color.y * 255)), 255))
         let b = max(0, min(Int(round(color.z * 255)), 255))
         return "\(r) \(g) \(b)"
+    }
+
+    private func split(longLine: String) -> [String] {
+        let offset = 70
+        guard longLine.count > offset else { return [longLine] }
+        let startIndex = longLine.startIndex
+        let index = longLine.index(startIndex, offsetBy: offset)
+        if longLine[index] == " " {
+            return [longLine[startIndex..<index], longLine[index...]]
+                        .map(String.init)
+                        .map { $0.trimmingCharacters(in: .whitespaces) }
+        } else {
+            let spaceIndex = longLine[startIndex..<index].lastIndex { $0 == " " }!
+            return [longLine[startIndex..<spaceIndex], longLine[spaceIndex...]]
+                        .map(String.init)
+                        .map { $0.trimmingCharacters(in: .whitespaces) }
+        }
     }
 }
 
@@ -96,6 +114,19 @@ class CanvasTests: XCTestCase {
             "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
             "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0",
             "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
+        ])
+    }
+
+    func test_ppm_splitsLinesSoThatNoneAreMoreThan70CharactersLong() {
+        var canvas = Canvas(width: 10, height: 2, fillColor: color(red: 1, green: 0.8, blue: 0.6))
+
+        let ppmLines = canvas.linesFromPPM(from: 4, to: 7)
+
+        XCTAssertEqual(ppmLines, [
+            "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+            "153 255 204 153 255 204 153 255 204 153 255 204 153",
+            "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
+            "153 255 204 153 255 204 153 255 204 153 255 204 153"
         ])
     }
 }
