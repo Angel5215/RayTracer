@@ -18,6 +18,7 @@ struct Canvas {
     }
 
     mutating func writePixel(with color: Color, at position: Canvas.Position) {
+        guard position.x >= 0, position.y >= 0, position.x < width, position.y < height else { return }
         pixels[position.y][position.x] = color
     }
 
@@ -137,6 +138,22 @@ class CanvasTests: XCTestCase {
         var canvas = Canvas(width: 5, height: 3)
 
         XCTAssertTrue(canvas.ppm.hasSuffix("\n"))
+    }
+
+    func test_writePixel_doesNothingOnOutOfBoundsCoordinate() {
+        let width = 5
+        let height = 3
+        var canvas = Canvas(width: width, height: height)
+
+        canvas.writePixel(with: color(red: 0.5, green: 1, blue: 1), at: (x: 10, y: 2))
+        canvas.writePixel(with: color(red: 0.5, green: 1, blue: 1), at: (x: 0, y: 20))
+        canvas.writePixel(with: color(red: 0.5, green: 1, blue: 1), at: (x: 10, y: 30))
+
+        for y in 0..<height {
+            for x in 0..<width {
+                XCTAssertEqual(canvas.pixel(at: (x: x, y: y)), .black, "Color is not black at position (\(x), \(y))")
+            }
+        }
     }
 }
 
