@@ -24,6 +24,14 @@ struct Canvas {
     func pixel(at position: Canvas.Position) -> Color {
         pixels[position.y][position.x]
     }
+
+    var ppm: String {
+        """
+        P3
+        \(width) \(height)
+        255
+        """
+    }
 }
 
 class CanvasTests: XCTestCase {
@@ -49,5 +57,23 @@ class CanvasTests: XCTestCase {
         canvas.writePixel(with: red, at: (x: 2, y: 3))
 
         XCTAssertEqual(canvas.pixel(at: (x: 2, y: 3)), red)
+    }
+
+    func test_ppm_constructsCorrectHeader() {
+        let canvas = Canvas(width: 5, height: 3)
+
+        let firstThreeLinesOfPPM = canvas.linesFromPPM(from: 1, to: 3)
+
+        XCTAssertEqual(firstThreeLinesOfPPM, ["P3", "5 3", "255"])
+    }
+}
+
+// MARK: - Test Helpers
+
+private extension Canvas {
+    func linesFromPPM(from startLine: Int, to endLine: Int) -> [String] {
+        let ppm = self.ppm
+        guard endLine <= ppm.count + 1 else { return [] }
+        return ppm.split(separator: "\n")[startLine - 1..<endLine].map(String.init)
     }
 }
