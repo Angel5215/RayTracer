@@ -33,6 +33,7 @@ struct Canvas {
         """
         .appending("\n")
         .appending(constructPixelData())
+        .appending("\n")
     }
 
     private func constructPixelData() -> String {
@@ -130,6 +131,12 @@ class CanvasTests: XCTestCase {
             "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204",
             "153 255 204 153 255 204 153 255 204 153 255 204 153"
         ])
+    }
+
+    func test_ppm_endsWithNewlineCharacter() {
+        var canvas = Canvas(width: 5, height: 3)
+
+        XCTAssertTrue(canvas.ppm.hasSuffix("\n"))
     }
 }
 
