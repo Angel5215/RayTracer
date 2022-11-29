@@ -31,6 +31,22 @@ struct Canvas {
         \(width) \(height)
         255
         """
+        .appending(constructPixelData())
+    }
+
+    private func constructPixelData() -> String {
+        var pixelData = "\n"
+        for row in pixels {
+            pixelData += row.map(string).joined(separator: " ") + "\n"
+        }
+        return pixelData
+    }
+
+    private func string(from color: Color) -> String {
+        let r = max(0, min(Int(round(color.x * 255)), 255))
+        let g = max(0, min(Int(round(color.y * 255)), 255))
+        let b = max(0, min(Int(round(color.z * 255)), 255))
+        return "\(r) \(g) \(b)"
     }
 }
 
@@ -66,14 +82,33 @@ class CanvasTests: XCTestCase {
 
         XCTAssertEqual(firstThreeLinesOfPPM, ["P3", "5 3", "255"])
     }
+
+    func test_ppm_addsPixelDataWithClampedValues() {
+        var canvas = Canvas(width: 5, height: 3)
+
+        canvas.writePixel(with: color(red: 1.5, green: 0, blue: 0), at: (x: 0, y: 0))
+        canvas.writePixel(with: color(red: 0, green: 0.5, blue: 0), at: (x: 2, y: 1))
+        canvas.writePixel(with: color(red: -0.5, green: 0, blue: 1), at: (x: 4, y: 2))
+
+        let ppmLines = canvas.linesFromPPM(from: 4, to: 6)
+
+        XCTAssertEqual(ppmLines, [
+            "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+            "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0",
+            "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
+        ])
+    }
 }
 
 // MARK: - Test Helpers
 
 private extension Canvas {
-    func linesFromPPM(from startLine: Int, to endLine: Int) -> [String] {
-        let ppm = self.ppm
-        guard endLine <= ppm.count + 1 else { return [] }
-        return ppm.split(separator: "\n")[startLine - 1..<endLine].map(String.init)
+    func linesFromPPM(from startLine: Int, to endLine: Int, file: StaticString = #filePath, line: UInt = #line) -> [String]? {
+        let lines = self.ppm.split(separator: "\n")
+        guard endLine <= lines.count else {
+            XCTFail("Requested endline (\(endLine)) not found in current line count (\(lines.count))", file: file, line: line)
+            return nil
+        }
+        return lines[startLine - 1..<endLine].map(String.init)
     }
 }
