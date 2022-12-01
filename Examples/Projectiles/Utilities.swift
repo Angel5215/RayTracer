@@ -6,6 +6,8 @@ import ArgumentParser
 import Foundation
 import RayTracer
 
+// MARK: - Data structures
+
 // Data input to be read from a JSON file.
 struct DataInput: Decodable {
     let position: Tuple2D
@@ -19,6 +21,8 @@ struct Tuple2D: Decodable {
     let x: Double
     let y: Double
 }
+
+// MARK: - Functions
 
 // Represents the given projectile after one unit of time has passed
 // The actual units of time doesn't matter, we'll call them ticks for this purpose

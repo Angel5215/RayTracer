@@ -15,9 +15,3 @@ struct Command: ParsableCommand {
         defaultSubcommand: Calculate.self
     )
 }
-
-// MARK: - Options
-struct Options: ParsableArguments {
-    @Option(name: .customLong("input"), help: Help.inputFile, transform: URL.init(fileURLWithPath:))
-    var inputFile: URL
-}

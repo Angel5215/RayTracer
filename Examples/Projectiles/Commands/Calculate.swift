@@ -11,7 +11,7 @@ struct Calculate: ParsableCommand {
 
     @OptionGroup var options: Options
 
-    @Option(name: .long, help: "Maximum fraction digits to display")
+    @Option(name: .long, help: Help.maximumFractionDigits)
     var maximumFractionDigits = 4
 
     func run() throws {
