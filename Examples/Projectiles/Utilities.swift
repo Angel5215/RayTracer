@@ -12,7 +12,6 @@ struct DataInput: Decodable {
     let velocity: Tuple2D
     let gravity: Tuple2D
     let wind: Tuple2D
-    let maximumFractionDigits: Int?
 }
 
 // Represents a 2D tuple passed as an argument to this command
