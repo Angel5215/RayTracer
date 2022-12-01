@@ -29,3 +29,50 @@ func tick(environment: Environment, projectile: Projectile) -> Projectile {
     )
 }
 
+// Decode input JSON file
+func loadData(from inputFile: URL) throws -> DataInput {
+    let data = try Data(contentsOf: inputFile)
+    return try JSONDecoder().decode(DataInput.self, from: data)
+}
+
+// Load projectile and environment information from parsed input file
+func extractInformation(from dataInput: DataInput) -> (projectile: Projectile, environment: Environment) {
+    let projectile = Projectile(
+        position: point(
+            x: dataInput.position.x,
+            y: dataInput.position.y,
+            z: 0
+        ),
+        velocity: vector(
+            x: dataInput.velocity.x,
+            y: dataInput.velocity.y,
+            z: 0
+        ).normalized()
+    )
+
+    let environment = Environment(
+        gravity: vector(
+            x: dataInput.gravity.x,
+            y: dataInput.gravity.y,
+            z: 0
+        ),
+        wind: vector(
+            x: dataInput.wind.x,
+            y: dataInput.wind.y,
+            z: 0
+        )
+    )
+
+    return (projectile, environment)
+}
+
+// Calculations for projectile position
+func positionsBeforeLanding(of projectile: Projectile, in environment: Environment) -> [Point] {
+    var positions = [projectile.position]
+    var projectile = projectile
+    while projectile.position.y > 0 {
+        projectile = tick(environment: environment, projectile: projectile)
+        positions.append(projectile.position)
+    }
+    return positions
+}
