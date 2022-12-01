@@ -40,16 +40,9 @@ Chapter 1 is complete with implementation of primitives (tuples, points, and vec
 
 To test these in action, a sample CLI tool can be run to play a simulation of firing virtual projectiles and see how far they go. To run you can set up a terminal and type the following command. 
 
+The CLI tool reads a JSON file that requires a `position`, a `velocity`, a `gravity` and `wind`. It optionally requires a `maximumFractionDigits` that will control the amount of fraction digits displayed in calculations. An example for this file is included [here](Examples/Files/projectiles.json).
+
 ```bash
-# Using short names for options
-swift run projectiles -p '(0,1)' -v '(1,1)' -g '(0,-0.1)' -w '(-0.01,0)'
-
-# Using long names
-swift run projectiles --position '(0,1)' --velocity '(1,1)' --gravity '(0,-0.1)' --wind '(-0.01,0)'
-
-# Show help information (-h / --help)
-swift run projectiles -h
-
-# Showing an specific amount of maximum fraction digits (by default this parameter is 4)
-swift run projectiles -p '(0,1)' -v '(1,1)' -g '(0,-0.1)' -w '(-0.01,0)' --maximum-fraction-digits 6
+# Passing an input JSON file with values
+swift run projectiles --input Examples/Files/projectiles.json
 ```
