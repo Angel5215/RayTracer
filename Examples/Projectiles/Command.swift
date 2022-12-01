@@ -8,15 +8,27 @@ import RayTracer
 
 @main
 struct Command: ParsableCommand {
-    @Option(
-        name: .customLong("input"),
-        help: Help.inputFile,
-        transform: URL.init(fileURLWithPath:)
+    static let configuration = CommandConfiguration(
+        abstract: "A utility to simulate firing projectiles",
+        version: "0.1.0",
+        subcommands: [Calculate.self],
+        defaultSubcommand: Calculate.self
     )
-    private var inputFile: URL
+}
+
+// MARK: - Options
+struct Options: ParsableArguments {
+    @Option(name: .customLong("input"), help: Help.inputFile, transform: URL.init(fileURLWithPath:))
+    var inputFile: URL
+}
+
+struct Calculate: ParsableCommand {
+    static let configuration = CommandConfiguration(abstract: "Calculate values from firing a projectile.")
+
+    @OptionGroup var options: Options
 
     func run() throws {
-        let data = try Data(contentsOf: inputFile)
+        let data = try Data(contentsOf: options.inputFile)
         let decoder = JSONDecoder()
         let information = try decoder.decode(DataInput.self, from: data)
 
@@ -55,15 +67,10 @@ struct Command: ParsableCommand {
             reportStatus(of: projectile, using: formatter)
         }
     }
-}
 
-// MARK: - Helpers
-
-extension Command {
     private func reportStatus(of projectile: Projectile, using formatter: NumberFormatter) {
         let x = formatter.string(from: NSNumber(value: projectile.position.x))!
         let y = formatter.string(from: NSNumber(value: projectile.position.y))!
         print("Position:", "(\(x), \(y))")
     }
 }
-
