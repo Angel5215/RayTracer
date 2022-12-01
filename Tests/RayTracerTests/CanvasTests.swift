@@ -55,7 +55,7 @@ class CanvasTests: XCTestCase {
     }
 
     func test_ppm_splitsLinesSoThatNoneAreMoreThan70CharactersLong() {
-        var canvas = Canvas(width: 10, height: 2, fillColor: color(red: 1, green: 0.8, blue: 0.6))
+        let canvas = Canvas(width: 10, height: 2, fillColor: color(red: 1, green: 0.8, blue: 0.6))
 
         let ppmLines = canvas.linesFromPPM(from: 4, to: 7)
 
@@ -68,7 +68,7 @@ class CanvasTests: XCTestCase {
     }
 
     func test_ppm_endsWithNewlineCharacter() {
-        var canvas = Canvas(width: 5, height: 3)
+        let canvas = Canvas(width: 5, height: 3)
 
         XCTAssertTrue(canvas.ppm.hasSuffix("\n"))
     }
