@@ -14,6 +14,7 @@ struct DataInput: Decodable {
     let velocity: Tuple2D
     let gravity: Tuple2D
     let wind: Tuple2D
+    let speed: Double
 }
 
 // Represents a 2D tuple passed as an argument to this command
@@ -47,7 +48,7 @@ func extractInformation(from dataInput: DataInput) -> (projectile: Projectile, e
             y: dataInput.position.y,
             z: 0
         ),
-        velocity: vector(
+        velocity: dataInput.speed * vector(
             x: dataInput.velocity.x,
             y: dataInput.velocity.y,
             z: 0

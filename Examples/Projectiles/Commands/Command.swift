@@ -11,7 +11,7 @@ struct Command: ParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "A utility to simulate firing projectiles",
         version: "0.1.0",
-        subcommands: [Calculate.self],
+        subcommands: [Calculate.self, Graph.self],
         defaultSubcommand: Calculate.self
     )
 }
