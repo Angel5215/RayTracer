@@ -6,21 +6,19 @@ import ArgumentParser
 import Foundation
 import RayTracer
 
+// Data input to be read from a JSON file.
+struct DataInput: Decodable {
+    let position: Tuple2D
+    let velocity: Tuple2D
+    let gravity: Tuple2D
+    let wind: Tuple2D
+    let maximumFractionDigits: Int?
+}
+
 // Represents a 2D tuple passed as an argument to this command
-struct Tuple2D: ExpressibleByArgument {
+struct Tuple2D: Decodable {
     let x: Double
     let y: Double
-
-    init?(argument: String) {
-        let valueArray = argument
-            .trimmingCharacters(in: .alphanumerics.inverted)
-            .split(separator: ",")
-            .compactMap(Double.init)
-
-        guard valueArray.count == 2 else { return nil }
-        self.x = valueArray[0]
-        self.y = valueArray[1]
-    }
 }
 
 // Represents the given projectile after one unit of time has passed

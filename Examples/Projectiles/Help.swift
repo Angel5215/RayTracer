@@ -5,46 +5,25 @@
 import ArgumentParser
 
 enum Help {
-    static var position: ArgumentHelp {
-        ArgumentHelp(stringLiteral:
-        """
-        The starting point of the projectile. This value should be passed as a tuple \
-        of two elements inside single quotes with parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. '(3.59,-15.39)'.
-        """)
-    }
+    static var inputFile: ArgumentHelp {
+        let abstract = """
+        Input file in JSON format from where to read position, velocity, gravity, wind and optionally \
+        a maximum fraction digits for calculations presentation.
 
-    static var velocity: ArgumentHelp {
-        ArgumentHelp(stringLiteral:
-        """
-        The velocity vector of the projectile. This value should be passed as a tuple \
-        of two elements inside single quotes with parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. '(3.59,-15.39)'.
-        """)
-    }
+        JSON file should include position, velocity, gravity, wind, and an optional maximum \
+        fraction digits like the following format. When not providing a maximum fraction digits \
+        count this command defaults to showing 4 fractional digits.
 
-    static var gravity: ArgumentHelp {
-        ArgumentHelp(stringLiteral:
+        ```
+        {
+            "position": { "x": 10.2, "y": 20.3 },
+            "velocity": { "x": 10.2, "y": 20.3 },
+            "gravity": { "x": 10.2, "y": 20.3 },
+            "wind": { "x": 10.2, "y": 20.3 },
+            "maximumFractionDigits": 6
+        }
+        ```
         """
-        The gravity vector of the environment. This value should be passed as a tuple \
-        of two elements inside single quotes with parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. '(3.59,-15.39)'.
-        """)
-    }
-
-    static var wind: ArgumentHelp {
-        ArgumentHelp(stringLiteral:
-        """
-        The wind vector of the environment. This value should be passed as a tuple \
-        of two elements inside single quotes with parenthesis, separated by a comma without spaces. \
-        Values are allowed to be negative numbers e.g. '(3.59,-15.39)'.
-        """)
-    }
-
-    static var maximumFractionDigits: ArgumentHelp {
-        ArgumentHelp(stringLiteral:
-        """
-        Maximum fraction digits to display in position calculations. Default value: 4
-        """)
+        return ArgumentHelp(abstract)
     }
 }

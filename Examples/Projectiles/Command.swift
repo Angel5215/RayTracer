@@ -8,33 +8,45 @@ import RayTracer
 
 @main
 struct Command: ParsableCommand {
-    @Option(name: .shortAndLong, help: Help.position)
-    private var position: Tuple2D
-
-    @Option(name: .shortAndLong, help: Help.velocity)
-    private var velocity: Tuple2D
-
-    @Option(name: .shortAndLong, help: Help.gravity)
-    private var gravity: Tuple2D
-
-    @Option(name: .shortAndLong, help: Help.wind)
-    private var wind: Tuple2D
-
-    @Option(name: .long, help: Help.maximumFractionDigits)
-    private var maximumFractionDigits: Int = 4
+    @Option(
+        name: .customLong("input"),
+        help: Help.inputFile,
+        transform: URL.init(fileURLWithPath:)
+    )
+    private var inputFile: URL
 
     func run() throws {
+        let data = try Data(contentsOf: inputFile)
+        let decoder = JSONDecoder()
+        let information = try decoder.decode(DataInput.self, from: data)
+
         let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = maximumFractionDigits
+        formatter.maximumFractionDigits = information.maximumFractionDigits ?? 4
 
         var projectile = Projectile(
-            position: point(x: position.x, y: position.y, z: 0),
-            velocity: vector(x: velocity.x, y: velocity.y, z: 0).normalized()
+            position: point(
+                x: information.position.x,
+                y: information.position.y,
+                z: 0
+            ),
+            velocity: vector(
+                x: information.velocity.x,
+                y: information.velocity.y,
+                z: 0
+            ).normalized()
         )
 
         let environment = Environment(
-            gravity: vector(x: gravity.x, y: gravity.y, z: 0),
-            wind: vector(x: wind.x, y: wind.y, z: 0)
+            gravity: vector(
+                x: information.gravity.x,
+                y: information.gravity.y,
+                z: 0
+            ),
+            wind: vector(
+                x: information.wind.x,
+                y: information.wind.y,
+                z: 0
+            )
         )
 
         reportStatus(of: projectile, using: formatter)
