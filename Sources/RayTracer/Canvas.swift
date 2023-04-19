@@ -16,9 +16,8 @@ public struct Canvas {
         P3
         \(width) \(height)
         255
+        \(constructPixelData())
         """
-        .appending("\n")
-        .appending(constructPixelData())
         .appending("\n")
     }
 
@@ -55,10 +54,14 @@ public struct Canvas {
     }
 
     private func string(from color: Color) -> String {
-        let r = max(0, min(Int(round(color.x * 255)), 255))
-        let g = max(0, min(Int(round(color.y * 255)), 255))
-        let b = max(0, min(Int(round(color.z * 255)), 255))
+        let r = constrain(value: Int(round(color.x * 255)), between: 0, and: 255)
+        let g = constrain(value: Int(round(color.y * 255)), between: 0, and: 255)
+        let b = constrain(value: Int(round(color.z * 255)), between: 0, and: 255)
         return "\(r) \(g) \(b)"
+    }
+
+    private func constrain(value: Int, between minimum: Int, and maximum: Int) -> Int {
+        max(minimum, min(value, maximum))
     }
 
     private func split(longLine: String) -> [String] {
@@ -76,7 +79,6 @@ public struct Canvas {
             let spaceIndex = longLine[startIndex..<index].lastIndex { $0 == space }!
             newLines = [longLine[startIndex..<spaceIndex], longLine[spaceIndex...]]
         }
-
         return newLines.map(String.init).map { $0.trimmingCharacters(in: .whitespaces) }
     }
 }
