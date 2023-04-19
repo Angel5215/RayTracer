@@ -5,7 +5,7 @@ import XCTest
 class TupleTests: XCTestCase {
     func test_init_withLastComponentOneIsPoint() {
         let tuple = Tuple(x: 4.3, y: -4.2, z: 3.1, w: 1)
-        
+
         XCTAssertEqual(tuple.x, 4.3)
         XCTAssertEqual(tuple.y, -4.2)
         XCTAssertEqual(tuple.z, 3.1)
@@ -13,10 +13,10 @@ class TupleTests: XCTestCase {
         XCTAssertTrue(tuple.isPoint)
         XCTAssertFalse(tuple.isVector)
     }
-    
+
     func test_init_withLastComponentZeroIsVector() {
         let tuple = Tuple(x: 4.3, y: -4.2, z: 3.1, w: 0)
-        
+
         XCTAssertEqual(tuple.x, 4.3)
         XCTAssertEqual(tuple.y, -4.2)
         XCTAssertEqual(tuple.z, 3.1)
@@ -24,10 +24,10 @@ class TupleTests: XCTestCase {
         XCTAssertFalse(tuple.isPoint)
         XCTAssertTrue(tuple.isVector)
     }
-    
+
     func test_point_createsPoint() {
         let tuple = Tuple.point(x: 4, y: -4, z: 3)
-        
+
         XCTAssertEqual(tuple.x, 4)
         XCTAssertEqual(tuple.y, -4)
         XCTAssertEqual(tuple.z, 3)
@@ -200,7 +200,7 @@ class TupleTests: XCTestCase {
         let vector1 = Tuple.vector(x: 1, y: 2, z: 3)
         let vector2 = Tuple.vector(x: 2, y: 3, z: 4)
 
-        let dotProduct = vector1 • vector2
+        let dotProduct = vector1 ** vector2
 
         XCTAssertEqual(dotProduct, 20.0)
     }
@@ -209,8 +209,8 @@ class TupleTests: XCTestCase {
         let vector1 = Tuple.vector(x: 1, y: 2, z: 3)
         let vector2 = Tuple.vector(x: 2, y: 3, z: 4)
 
-        let result1 = vector1 ⨯ vector2
-        let result2 = vector2 ⨯ vector1
+        let result1 = vector1 *+ vector2
+        let result2 = vector2 *+ vector1
 
         XCTAssertEqual(result1, Tuple.vector(x: -1, y: 2, z: -1))
         XCTAssertEqual(result2, Tuple.vector(x: 1, y: -2, z: 1))
@@ -223,7 +223,7 @@ class TupleTests: XCTestCase {
         let d = Tuple.vector(x: 3, y: -2, z: 1)
         let e = Tuple.vector(x: -1, y: 2, z: -3)
 
-        let result = 10 * a ⨯ b ⨯ c • d * e
+        let result = 10 * a *+ b *+ c ** d * e
 
         XCTAssertEqual(result, Tuple.vector(x: -20, y: 40, z: -60))
     }

@@ -29,11 +29,11 @@ public extension Tuple {
         lhs.divided(by: rhs)
     }
 
-    static func •(lhs: Tuple, rhs: Tuple) -> Double {
+    static func **(lhs: Tuple, rhs: Tuple) -> Double {
         lhs.dotProduct(with: rhs)
     }
 
-    static func ⨯(lhs: Tuple, rhs: Tuple) -> Tuple {
+    static func *+(lhs: Tuple, rhs: Tuple) -> Tuple {
         lhs.crossProduct(with: rhs)
     }
 
