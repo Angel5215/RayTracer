@@ -54,14 +54,10 @@ public struct Canvas {
     }
 
     private func string(from color: Color) -> String {
-        let r = constrain(value: Int(round(color.x * 255)), between: 0, and: 255)
-        let g = constrain(value: Int(round(color.y * 255)), between: 0, and: 255)
-        let b = constrain(value: Int(round(color.z * 255)), between: 0, and: 255)
+        @Constrained(minimum: 0, maximum: 255) var r = Int(round(color.red * 255))
+        @Constrained(minimum: 0, maximum: 255) var g = Int(round(color.green * 255))
+        @Constrained(minimum: 0, maximum: 255) var b = Int(round(color.blue * 255))
         return "\(r) \(g) \(b)"
-    }
-
-    private func constrain(value: Int, between minimum: Int, and maximum: Int) -> Int {
-        max(minimum, min(value, maximum))
     }
 
     private func split(longLine: String) -> [String] {
