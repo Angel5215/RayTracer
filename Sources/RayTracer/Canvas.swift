@@ -60,17 +60,17 @@ public struct Canvas {
         return "\(r) \(g) \(b)"
     }
 
-    private func split(longLine: String) -> [String] {
+    private func split(line: String) -> [String] {
         let maxLineLength = 70
-        guard longLine.count > maxLineLength else { return [longLine] }
+        guard line.count > maxLineLength else { return [line] }
 
-        let startIndex = longLine.startIndex
-        let maxLengthIndex = longLine.index(startIndex, offsetBy: maxLineLength - 1)
+        let startIndex = line.startIndex
+        let maxLengthIndex = line.index(startIndex, offsetBy: maxLineLength - 1)
 
         let space: Character = " "
-        let lastSpaceIndex = longLine[startIndex...maxLengthIndex].lastIndex(of: space)!
+        let lastSpaceIndex = line[startIndex...maxLengthIndex].lastIndex(of: space)!
 
-        let newLines = [longLine[startIndex..<lastSpaceIndex], longLine[lastSpaceIndex...]]
+        let newLines = [line[startIndex..<lastSpaceIndex], line[lastSpaceIndex...]]
         return newLines.map(String.init).map { $0.trimmingCharacters(in: .whitespaces) }
     }
 }
