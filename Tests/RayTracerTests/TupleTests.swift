@@ -163,7 +163,7 @@ class TupleTests: XCTestCase {
     func test_negate_generatesCorrectResults() {
         let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
 
-        let result = tuple.negated()
+        let result = -tuple
 
         XCTAssertEqual(result, Tuple(x: -1, y: 2, z: -3, w: 4))
     }
