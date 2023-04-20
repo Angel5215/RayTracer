@@ -71,6 +71,6 @@ public struct Canvas {
         let lastSpaceIndex = line[startIndex...maxLengthIndex].lastIndex(of: space)!
 
         let newLines = [line[startIndex..<lastSpaceIndex], line[lastSpaceIndex...]]
-        return newLines.map(String.init).map { $0.trimmingCharacters(in: .whitespaces) }
+        return newLines.map { substring in String(substring.trimmingCharacters(in: .whitespaces)) }
     }
 }
