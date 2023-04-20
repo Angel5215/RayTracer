@@ -61,10 +61,12 @@ public struct Canvas {
     }
 
     private func split(longLine: String) -> [String] {
-        let offset = 70
-        guard longLine.count > offset else { return [longLine] }
+        let maxLineLength = 70
+        guard longLine.count > maxLineLength else { return [longLine] }
+
         let startIndex = longLine.startIndex
-        let index = longLine.index(startIndex, offsetBy: offset)
+        let index = longLine.index(startIndex, offsetBy: maxLineLength - 1)
+
         let space: Character = " "
         let newLines: [Substring]
 

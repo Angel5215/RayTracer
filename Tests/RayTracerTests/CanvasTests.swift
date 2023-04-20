@@ -67,6 +67,19 @@ class CanvasTests: XCTestCase {
         ])
     }
 
+    func test_ppm_splitsLinesSoThatNoneAreMoreThan70CharactersLongWhenCharacter70IsSpace() {
+        let canvas = Canvas(width: 10, height: 2, fillColor: color(red: 0.047, green: 0.047, blue: 0.019))
+
+        let ppmLines = canvas.linesFromPPM(from: 4, to: 7)
+
+        XCTAssertEqual(ppmLines, [
+            "12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12",
+            "5 12 12 5",
+            "12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12 5 12 12",
+            "5 12 12 5"
+        ])
+    }
+
     func test_ppm_endsWithNewlineCharacter() {
         let canvas = Canvas(width: 5, height: 3)
 
