@@ -65,18 +65,12 @@ public struct Canvas {
         guard longLine.count > maxLineLength else { return [longLine] }
 
         let startIndex = longLine.startIndex
-        let index = longLine.index(startIndex, offsetBy: maxLineLength - 1)
+        let maxLengthIndex = longLine.index(startIndex, offsetBy: maxLineLength - 1)
 
         let space: Character = " "
-        let newLines: [Substring]
+        let lastSpaceIndex = longLine[startIndex...maxLengthIndex].lastIndex(of: space)!
 
-        if longLine[index] == space {
-            newLines = [longLine[startIndex..<index], longLine[index...]]
-        } else {
-            // Substring is guaranteed to have at least one space
-            let spaceIndex = longLine[startIndex..<index].lastIndex { $0 == space }!
-            newLines = [longLine[startIndex..<spaceIndex], longLine[spaceIndex...]]
-        }
+        let newLines = [longLine[startIndex..<lastSpaceIndex], longLine[lastSpaceIndex...]]
         return newLines.map(String.init).map { $0.trimmingCharacters(in: .whitespaces) }
     }
 }
