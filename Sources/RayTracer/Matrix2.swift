@@ -5,16 +5,16 @@
 
 public struct Matrix2: Equatable {
     private let dimension = 2
-    private let rows: [[Double]]
+    private let values: [Double]
 
-    public init(rows: [[Double]]) {
-        assert(isMatrixValid(for: dimension, rows: rows), "Matrix should have \(dimension * dimension) values.")
-        self.rows = rows
+    public init(values: [Double]) {
+        assert(values.count == dimension * dimension, "Matrix should have \(dimension * dimension) values.")
+        self.values = values
     }
 
     public subscript(row: Int, column: Int) -> Double {
         get {
-            rows[row][column]
+            values[dimension * row + column]
         }
     }
 }
