@@ -2,76 +2,8 @@
 // Created by Ángel Vázquez on 20/04/23.
 //
 
+import RayTracer
 import XCTest
-
-private func isMatrixValid(for dimension: Int, rows: [[Double]]) -> Bool {
-    guard rows.count == dimension else { return false }
-    return rows.allSatisfy { row in row.count == dimension }
-}
-
-struct Matrix2: Equatable {
-    private let dimension = 2
-    private let rows: [[Double]]
-
-    init(rows: [[Double]]) {
-        assert(isMatrixValid(for: dimension, rows: rows), "Matrix should have \(dimension * dimension) values.")
-        self.rows = rows
-    }
-
-    subscript(row: Int, column: Int) -> Double {
-        get {
-            rows[row][column]
-        }
-    }
-}
-
-struct Matrix3: Equatable {
-    private let dimension = 3
-    private let rows: [[Double]]
-
-    init(rows: [[Double]]) {
-        assert(isMatrixValid(for: dimension, rows: rows), "Matrix should have \(dimension * dimension) values.")
-        self.rows = rows
-    }
-
-    subscript(row: Int, column: Int) -> Double {
-        get {
-            rows[row][column]
-        }
-    }
-}
-
-struct Matrix4: Equatable {
-    private let dimension = 4
-    private let rows: [[Double]]
-
-    init(rows: [[Double]]) {
-        assert(isMatrixValid(for: dimension, rows: rows), "Matrix should have \(dimension * dimension) values.")
-        self.rows = rows
-    }
-
-    subscript(row: Int, column: Int) -> Double {
-        get {
-            rows[row][column]
-        }
-    }
-
-    func multiplying(_ matrix: Matrix4) -> Matrix4 {
-        var newValues = [[Double]](repeating: [Double](repeating: 0, count: dimension), count: dimension)
-
-        for row in 0..<dimension {
-            for column in 0..<dimension {
-                newValues[row][column] =
-                    self[row, 0] * matrix[0, column] +
-                    self[row, 1] * matrix[1, column] +
-                    self[row, 2] * matrix[2, column] +
-                    self[row, 3] * matrix[3, column]
-            }
-        }
-
-        return Matrix4(rows: newValues)
-    }
-}
 
 class MatrixTests: XCTestCase {
     func test_init_creates4x4Matrix() {
