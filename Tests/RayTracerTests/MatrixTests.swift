@@ -74,4 +74,12 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(result, Matrix4(values: [20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42]))
     }
 
+    func test_multipliedByTuple_returnsNewTuple() {
+        let matrix = Matrix4(values: [1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1])
+        let tuple = Tuple(x: 1, y: 2, z: 3, w: 1)
+
+        let result = matrix.multiplied(by: tuple)
+
+        XCTAssertEqual(result, Tuple(x: 18, y: 24, z: 33, w: 1))
+    }
 }

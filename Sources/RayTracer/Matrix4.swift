@@ -32,4 +32,13 @@ public struct Matrix4: Equatable {
 
         return Matrix4(values: newValues)
     }
+
+    public func multiplied(by tuple: Tuple) -> Tuple {
+        Tuple(
+            x: self[0, 0] * tuple.x + self[0, 1] * tuple.y + self[0, 2] * tuple.z + self[0, 3] * tuple.w,
+            y: self[1, 0] * tuple.x + self[1, 1] * tuple.y + self[1, 2] * tuple.z + self[1, 3] * tuple.w,
+            z: self[2, 0] * tuple.x + self[2, 1] * tuple.y + self[2, 2] * tuple.z + self[2, 3] * tuple.w,
+            w: self[3, 0] * tuple.x + self[3, 1] * tuple.y + self[3, 2] * tuple.z + self[3, 3] * tuple.w
+        )
+    }
 }
