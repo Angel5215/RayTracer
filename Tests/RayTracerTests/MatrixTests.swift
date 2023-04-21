@@ -4,7 +4,7 @@
 
 import XCTest
 
-struct Matrix {
+struct Matrix: Equatable {
     private let dimension: Int
     private let rows: [[Double]]
 
@@ -77,5 +77,14 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(matrix[2, 0], 0)
         XCTAssertEqual(matrix[2, 1], 1)
         XCTAssertEqual(matrix[2, 2], 1)
+    }
+
+    func test_equality_returnsTrueForIdenticalMatrices() {
+        let firstMatrix = Matrix(dimension: 4, rows: [1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2])
+        let secondMatrix = Matrix(dimension: 4, rows: [1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2])
+        let thirdMatrix = Matrix(dimension: 4, rows: [2, 3, 4, 5], [6, 7, 8, 9], [8, 7, 6, 5], [4, 3, 2, 1])
+
+        XCTAssertEqual(firstMatrix, secondMatrix)
+        XCTAssertNotEqual(firstMatrix, thirdMatrix)
     }
 }
