@@ -8,7 +8,7 @@ struct Matrix {
     private let dimension: Int
     private let rows: [[Double]]
 
-    init(dimension: Int, rows: [[Double]]) {
+    init(dimension: Int, rows: [Double]...) {
         guard Matrix.isValid(for: dimension, rows: rows) else {
             preconditionFailure("Matrix should have \(dimension * dimension) values.")
         }
@@ -30,7 +30,7 @@ struct Matrix {
 
 class MatrixTests: XCTestCase {
     func test_init_creates4x4Matrix() {
-        let matrix = Matrix(dimension: 4, rows: [[1, 2, 3, 4], [5.5, 6.5, 7.5, 8.5], [9, 10, 11, 12], [13.5, 14.5, 15.5, 16.5]])
+        let matrix = Matrix(dimension: 4, rows: [1, 2, 3, 4], [5.5, 6.5, 7.5, 8.5], [9, 10, 11, 12], [13.5, 14.5, 15.5, 16.5])
 
         XCTAssertEqual(matrix[0, 0], 1)
         XCTAssertEqual(matrix[0, 1], 2)
@@ -54,7 +54,7 @@ class MatrixTests: XCTestCase {
     }
 
     func test_init_creates2x2Matrix() {
-        let matrix = Matrix(dimension: 2, rows: [[-3, 5], [1, -2]])
+        let matrix = Matrix(dimension: 2, rows: [-3, 5], [1, -2])
 
         XCTAssertEqual(matrix[0, 0], -3)
         XCTAssertEqual(matrix[0, 1], 5)
@@ -64,7 +64,7 @@ class MatrixTests: XCTestCase {
     }
 
     func test_init_creates3x3Matrix() {
-        let matrix = Matrix(dimension: 3, rows: [[-3, 5, 0], [1, -2, -7], [0, 1, 1]])
+        let matrix = Matrix(dimension: 3, rows: [-3, 5, 0], [1, -2, -7], [0, 1, 1])
 
         XCTAssertEqual(matrix[0, 0], -3)
         XCTAssertEqual(matrix[0, 1], 5)
