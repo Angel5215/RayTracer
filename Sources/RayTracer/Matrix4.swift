@@ -17,7 +17,7 @@ public struct Matrix4: Equatable {
         }
     }
 
-    public func multiplying(_ matrix: Matrix4) -> Matrix4 {
+    public func multiplied(by matrix: Matrix4) -> Matrix4 {
         var newValues = [Double](repeating: 0, count: dimension * dimension)
 
         for row in 0..<dimension {
