@@ -52,4 +52,30 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(matrix[3, 2], 15.5)
         XCTAssertEqual(matrix[3, 3], 16.5)
     }
+
+    func test_init_creates2x2Matrix() {
+        let matrix = Matrix(dimension: 2, rows: [[-3, 5], [1, -2]])
+
+        XCTAssertEqual(matrix[0, 0], -3)
+        XCTAssertEqual(matrix[0, 1], 5)
+
+        XCTAssertEqual(matrix[1, 0], 1)
+        XCTAssertEqual(matrix[1, 1], -2)
+    }
+
+    func test_init_creates3x3Matrix() {
+        let matrix = Matrix(dimension: 3, rows: [[-3, 5, 0], [1, -2, -7], [0, 1, 1]])
+
+        XCTAssertEqual(matrix[0, 0], -3)
+        XCTAssertEqual(matrix[0, 1], 5)
+        XCTAssertEqual(matrix[0, 2], 0)
+
+        XCTAssertEqual(matrix[1, 0], 1)
+        XCTAssertEqual(matrix[1, 1], -2)
+        XCTAssertEqual(matrix[1, 2], -7)
+
+        XCTAssertEqual(matrix[2, 0], 0)
+        XCTAssertEqual(matrix[2, 1], 1)
+        XCTAssertEqual(matrix[2, 2], 1)
+    }
 }
