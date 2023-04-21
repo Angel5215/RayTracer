@@ -4,40 +4,40 @@
 
 import XCTest
 
-struct Matrix4 {
-    let e00: Double
-    let e01: Double
-    let e02: Double
-    let e03: Double
-    let e10: Double
-    let e11: Double
-    let e12: Double
-    let e13: Double
-    let e20: Double
-    let e21: Double
-    let e22: Double
-    let e23: Double
-    let e30: Double
-    let e31: Double
-    let e32: Double
-    let e33: Double
+struct Matrix {
+    private let dimension: Int
+    private let rows: [[Double]]
+
+    init(dimension: Int, rows: [[Double]]) {
+        guard Matrix.isValid(for: dimension, rows: rows) else {
+            preconditionFailure("Matrix should have \(dimension * dimension) values.")
+        }
+        self.dimension = dimension
+        self.rows = rows
+    }
+
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            rows[row][column]
+        }
+    }
+
+    private static func isValid(for dimension: Int, rows: [[Double]]) -> Bool {
+        guard rows.count == dimension else { return false }
+        return rows.allSatisfy { row in row.count == dimension }
+    }
 }
 
 class Matrix4Tests: XCTestCase {
     func test_init_creates4x4Matrix() {
-        let matrix = Matrix4(
-            e00: 1, e01: 2, e02: 3, e03: 4,
-            e10: 5.5, e11: 6.5, e12: 7.5, e13: 8.5,
-            e20: 9, e21: 10, e22: 11, e23: 12,
-            e30: 13.5, e31: 14.5, e32: 15.5, e33: 16.5
-        )
+        let matrix = Matrix(dimension: 4, rows: [[1, 2, 3, 4], [5.5, 6.5, 7.5, 8.5], [9, 10, 11, 12], [13.5, 14.5, 15.5, 16.5]])
 
-        XCTAssertEqual(matrix.e00, 1)
-        XCTAssertEqual(matrix.e03, 4)
-        XCTAssertEqual(matrix.e10, 5.5)
-        XCTAssertEqual(matrix.e12, 7.5)
-        XCTAssertEqual(matrix.e22, 11)
-        XCTAssertEqual(matrix.e30, 13.5)
-        XCTAssertEqual(matrix.e32, 15.5)
+        XCTAssertEqual(matrix[0, 0], 1)
+        XCTAssertEqual(matrix[0, 3], 4)
+        XCTAssertEqual(matrix[1, 0], 5.5)
+        XCTAssertEqual(matrix[1, 2], 7.5)
+        XCTAssertEqual(matrix[2, 2], 11)
+        XCTAssertEqual(matrix[3, 0], 13.5)
+        XCTAssertEqual(matrix[3, 2], 15.5)
     }
 }
