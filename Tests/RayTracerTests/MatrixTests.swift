@@ -4,15 +4,49 @@
 
 import XCTest
 
-struct Matrix: Equatable {
-    private let dimension: Int
+private func isMatrixValid(for dimension: Int, rows: [[Double]]) -> Bool {
+    guard rows.count == dimension else { return false }
+    return rows.allSatisfy { row in row.count == dimension }
+}
+
+struct Matrix2: Equatable {
+    private let dimension = 2
     private let rows: [[Double]]
 
-    init(dimension: Int, rows: [[Double]]) {
-        guard Matrix.isValid(for: dimension, rows: rows) else {
-            preconditionFailure("Matrix should have \(dimension * dimension) values.")
+    init(rows: [[Double]]) {
+        assert(isMatrixValid(for: dimension, rows: rows), "Matrix should have \(dimension * dimension) values.")
+        self.rows = rows
+    }
+
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            rows[row][column]
         }
-        self.dimension = dimension
+    }
+}
+
+struct Matrix3: Equatable {
+    private let dimension = 3
+    private let rows: [[Double]]
+
+    init(rows: [[Double]]) {
+        assert(isMatrixValid(for: dimension, rows: rows), "Matrix should have \(dimension * dimension) values.")
+        self.rows = rows
+    }
+
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            rows[row][column]
+        }
+    }
+}
+
+struct Matrix4: Equatable {
+    private let dimension = 4
+    private let rows: [[Double]]
+
+    init(rows: [[Double]]) {
+        assert(isMatrixValid(for: dimension, rows: rows), "Matrix should have \(dimension * dimension) values.")
         self.rows = rows
     }
 
@@ -22,30 +56,26 @@ struct Matrix: Equatable {
         }
     }
 
-    private static func isValid(for dimension: Int, rows: [[Double]]) -> Bool {
-        guard rows.count == dimension else { return false }
-        return rows.allSatisfy { row in row.count == dimension }
-    }
-
-    func multiplying(_ matrix: Matrix) -> Matrix {
+    func multiplying(_ matrix: Matrix4) -> Matrix4 {
         var newValues = [[Double]](repeating: [Double](repeating: 0, count: dimension), count: dimension)
 
         for row in 0..<dimension {
             for column in 0..<dimension {
-                newValues[row][column] = self[row, 0] * matrix[0, column] +
+                newValues[row][column] =
+                    self[row, 0] * matrix[0, column] +
                     self[row, 1] * matrix[1, column] +
                     self[row, 2] * matrix[2, column] +
                     self[row, 3] * matrix[3, column]
             }
         }
 
-        return Matrix(dimension: dimension, rows: newValues)
+        return Matrix4(rows: newValues)
     }
 }
 
 class MatrixTests: XCTestCase {
     func test_init_creates4x4Matrix() {
-        let matrix = Matrix(dimension: 4, rows: [[1, 2, 3, 4], [5.5, 6.5, 7.5, 8.5], [9, 10, 11, 12], [13.5, 14.5, 15.5, 16.5]])
+        let matrix = Matrix4(rows: [[1, 2, 3, 4], [5.5, 6.5, 7.5, 8.5], [9, 10, 11, 12], [13.5, 14.5, 15.5, 16.5]])
 
         XCTAssertEqual(matrix[0, 0], 1)
         XCTAssertEqual(matrix[0, 1], 2)
@@ -69,7 +99,7 @@ class MatrixTests: XCTestCase {
     }
 
     func test_init_creates2x2Matrix() {
-        let matrix = Matrix(dimension: 2, rows: [[-3, 5], [1, -2]])
+        let matrix = Matrix2(rows: [[-3, 5], [1, -2]])
 
         XCTAssertEqual(matrix[0, 0], -3)
         XCTAssertEqual(matrix[0, 1], 5)
@@ -79,7 +109,7 @@ class MatrixTests: XCTestCase {
     }
 
     func test_init_creates3x3Matrix() {
-        let matrix = Matrix(dimension: 3, rows: [[-3, 5, 0], [1, -2, -7], [0, 1, 1]])
+        let matrix = Matrix3(rows: [[-3, 5, 0], [1, -2, -7], [0, 1, 1]])
 
         XCTAssertEqual(matrix[0, 0], -3)
         XCTAssertEqual(matrix[0, 1], 5)
@@ -95,20 +125,20 @@ class MatrixTests: XCTestCase {
     }
 
     func test_equality_returnsTrueForIdenticalMatrices() {
-        let firstMatrix = Matrix(dimension: 4, rows: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2]])
-        let secondMatrix = Matrix(dimension: 4, rows: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2]])
-        let thirdMatrix = Matrix(dimension: 4, rows: [[2, 3, 4, 5], [6, 7, 8, 9], [8, 7, 6, 5], [4, 3, 2, 1]])
+        let firstMatrix = Matrix4(rows: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2]])
+        let secondMatrix = Matrix4(rows: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2]])
+        let thirdMatrix = Matrix4(rows: [[2, 3, 4, 5], [6, 7, 8, 9], [8, 7, 6, 5], [4, 3, 2, 1]])
 
         XCTAssertEqual(firstMatrix, secondMatrix)
         XCTAssertNotEqual(firstMatrix, thirdMatrix)
     }
 
     func test_multiplying_returnsNewMatrix() {
-        let first = Matrix(dimension: 4, rows: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2]])
-        let second = Matrix(dimension: 4, rows: [[-2, 1, 2, 3], [3, 2, 1, -1], [4, 3, 6, 5], [1, 2, 7, 8]])
+        let first = Matrix4(rows: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2]])
+        let second = Matrix4(rows: [[-2, 1, 2, 3], [3, 2, 1, -1], [4, 3, 6, 5], [1, 2, 7, 8]])
 
         let result = first.multiplying(second)
 
-        XCTAssertEqual(result, Matrix(dimension: 4, rows: [[20, 22, 50, 48], [44, 54, 114, 108], [40, 58, 110, 102], [16, 26, 46, 42]]))
+        XCTAssertEqual(result, Matrix4(rows: [[20, 22, 50, 48], [44, 54, 114, 108], [40, 58, 110, 102], [16, 26, 46, 42]]))
     }
 }
