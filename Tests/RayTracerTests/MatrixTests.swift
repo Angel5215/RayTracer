@@ -26,6 +26,21 @@ struct Matrix: Equatable {
         guard rows.count == dimension else { return false }
         return rows.allSatisfy { row in row.count == dimension }
     }
+
+    func multiplying(_ matrix: Matrix) -> Matrix {
+        var newValues = [[Double]](repeating: [Double](repeating: 0, count: dimension), count: dimension)
+
+        for row in 0..<dimension {
+            for column in 0..<dimension {
+                newValues[row][column] = self[row, 0] * matrix[0, column] +
+                    self[row, 1] * matrix[1, column] +
+                    self[row, 2] * matrix[2, column] +
+                    self[row, 3] * matrix[3, column]
+            }
+        }
+
+        return Matrix(dimension: dimension, rows: newValues[0], newValues[1], newValues[2], newValues[3])
+    }
 }
 
 class MatrixTests: XCTestCase {
@@ -86,5 +101,14 @@ class MatrixTests: XCTestCase {
 
         XCTAssertEqual(firstMatrix, secondMatrix)
         XCTAssertNotEqual(firstMatrix, thirdMatrix)
+    }
+
+    func test_multiplying_returnsNewMatrix() {
+        let first = Matrix(dimension: 4, rows: [1, 2, 3, 4], [5, 6, 7, 8], [9, 8, 7, 6], [5, 4, 3, 2])
+        let second = Matrix(dimension: 4, rows: [-2, 1, 2, 3], [3, 2, 1, -1], [4, 3, 6, 5], [1, 2, 7, 8])
+
+        let result = first.multiplying(second)
+
+        XCTAssertEqual(result, Matrix(dimension: 4, rows: [20, 22, 50, 48], [44, 54, 114, 108], [40, 58, 110, 102], [16, 26, 46, 42]))
     }
 }
