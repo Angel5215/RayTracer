@@ -15,5 +15,5 @@ precedencegroup CrossProductPrecedence {
 
 // MARK: - Operators
 
-infix operator **: DotProductPrecedence
-infix operator *+: CrossProductPrecedence
+infix operator .*: DotProductPrecedence
+infix operator +*: CrossProductPrecedence
