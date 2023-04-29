@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Verify if a commit exists or diff against an empty tree object.
+if git rev-parse --verify HEAD > /dev/null 2>&1; then
+    against=HEAD
+else
+    against=$(git hash-object -t tree /dev/null)
+fi
+
+# Verify format script is installed and run it for all staged files.
+if which swiftformat > /dev/null 2>&1; then
+  REPO_ROOT=$(git rev-parse --show-toplevel)
+  HEADER="Created on {created}. Last modified in {year}."
+
+  # Run only on staged .swift files.
+  git diff --diff-filter=d --staged --name-only | grep -e "\(.*\).swift$" | while read file; do
+    swiftformat "$file" --config $REPO_ROOT/.swiftformat --quiet --header "$HEADER";
+    git add "$file";
+  done
+else
+  echo "warning: SwiftFormat not installed, skipping..."
+fi
