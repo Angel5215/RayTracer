@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Swift version
-        run: swift --version
+      - name: Install `xcbeautify`
+        run: brew install xcbeautify
 
       - name: Build
         run: swift build
 
       - name: Test
-        run: swift test
+        run: set -o pipefail && swift test | xcbeautify --is-ci
