@@ -38,3 +38,7 @@ public struct Matrix4: Equatable {
         )
     }
 }
+
+public extension Matrix4 {
+    static let identity = Matrix4(values: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
+}
