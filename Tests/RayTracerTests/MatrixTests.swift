@@ -116,6 +116,14 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(transposed, Matrix4.identity)
     }
 
+    func test_determinant_calculatesCorrectlyFor2x2Matrices() {
+        let matrix = Matrix2(values: [1, 5, -3, 2])
+
+        let determinant = matrix.determinant
+
+        XCTAssertEqual(determinant, 17)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {
