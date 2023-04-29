@@ -108,6 +108,14 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(transposed, Matrix4(values: [0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8]))
     }
 
+    func test_transposed_forIdentityMatrixReturnsIdentityMatrix() {
+        let identity = Matrix4.identity
+
+        let transposed = identity.transposed()
+
+        XCTAssertEqual(transposed, Matrix4.identity)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {
