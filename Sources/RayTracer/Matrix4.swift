@@ -1,6 +1,8 @@
 // Created on 28/04/23. Last modified in 2023.
 
 public struct Matrix4: Equatable {
+    public static let identity = Matrix4(values: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
+
     private let dimension = 4
     private let values: [Double]
 
@@ -37,8 +39,4 @@ public struct Matrix4: Equatable {
             w: self[3, 0] * tuple.x + self[3, 1] * tuple.y + self[3, 2] * tuple.z + self[3, 3] * tuple.w
         )
     }
-}
-
-public extension Matrix4 {
-    static let identity = Matrix4(values: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
 }

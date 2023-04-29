@@ -84,11 +84,20 @@ class MatrixTests: XCTestCase {
     func test_multipliedByIdentityMatrix_returnsSameMatrix() {
         let matrix = Matrix4(values: [0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32])
 
-        let result = matrix * .identity
-        let result2 = .identity * matrix
+        let result = matrix * Matrix4.identity
+        let result2 = Matrix4.identity * matrix
 
         XCTAssertEqual(result, matrix)
         XCTAssertEqual(result2, matrix)
+    }
+
+    func test_identityMultipliedByTuple_returnsTheSameTuple() {
+        let identity = Matrix4.identity
+        let tuple = Tuple(x: 1, y: 2, z: 3, w: 4)
+
+        let result = identity * tuple
+
+        XCTAssertEqual(result, tuple)
     }
 
     // MARK: - Tests with operators
