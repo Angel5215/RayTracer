@@ -1,6 +1,4 @@
-//
-// Created by Ángel Vázquez on 20/04/23.
-//
+// Created on 28/04/23. Last modified in 2023.
 
 import RayTracer
 import XCTest
@@ -84,6 +82,7 @@ class MatrixTests: XCTestCase {
     }
 
     // MARK: - Tests with operators
+
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {
         let first = Matrix4(values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2])
         let second = Matrix4(values: [-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8])

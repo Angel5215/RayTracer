@@ -1,6 +1,4 @@
-//
-// Created by Ángel Vázquez on 27/11/22.
-//
+// Created on 28/04/23. Last modified in 2023.
 
 import RayTracer
 import XCTest

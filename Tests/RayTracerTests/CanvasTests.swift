@@ -1,6 +1,4 @@
-//
-// Created by Ángel Vázquez on 27/11/22.
-//
+// Created on 28/04/23. Last modified in 2023.
 
 import RayTracer
 import XCTest
@@ -116,7 +114,7 @@ class CanvasTests: XCTestCase {
 
 private extension Canvas {
     func linesFromPPM(from startLine: Int, to endLine: Int, file: StaticString = #filePath, line: UInt = #line) -> [String]? {
-        let lines = self.ppm.split(separator: "\n")
+        let lines = ppm.split(separator: "\n")
         guard endLine <= lines.count else {
             XCTFail("Requested endline (\(endLine)) not found in current line count (\(lines.count))", file: file, line: line)
             return nil

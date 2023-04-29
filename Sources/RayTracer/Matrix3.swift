@@ -1,6 +1,4 @@
-//
-// Created by Ángel Vázquez on 21/04/23.
-//
+// Created on 28/04/23. Last modified in 2023.
 
 public struct Matrix3: Equatable {
     private let dimension = 3
@@ -12,8 +10,6 @@ public struct Matrix3: Equatable {
     }
 
     public subscript(row: Int, column: Int) -> Double {
-        get {
-            values[dimension * row + column]
-        }
+        values[dimension * row + column]
     }
 }

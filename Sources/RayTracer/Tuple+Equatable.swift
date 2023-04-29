@@ -1,9 +1,7 @@
-//
-// Created by Ángel Vázquez on 22/11/22.
-//
+// Created on 28/04/23. Last modified in 2023.
 
 extension Tuple: Equatable {
-    public static func ==(lhs: Tuple, rhs: Tuple) -> Bool {
+    public static func == (lhs: Tuple, rhs: Tuple) -> Bool {
         let isXEqual = isAlmostEqual(lhs: lhs.x, rhs: rhs.x)
         let isYEqual = isAlmostEqual(lhs: lhs.y, rhs: rhs.y)
         let isZEqual = isAlmostEqual(lhs: lhs.z, rhs: rhs.z)

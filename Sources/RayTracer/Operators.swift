@@ -1,6 +1,4 @@
-//
-// Created by Ángel Vázquez on 24/11/22.
-//
+// Created on 28/04/23. Last modified in 2023.
 
 // MARK: - Precedence groups
 

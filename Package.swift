@@ -29,6 +29,6 @@ let package = Package(
         .testTarget(
             name: "RayTracerTests",
             dependencies: ["RayTracer"]
-        ),
+        )
     ]
 )

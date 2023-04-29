@@ -1,6 +1,4 @@
-//
-// Created by Ángel Vázquez on 29/11/22.
-//
+// Created on 28/04/23. Last modified in 2023.
 
 import Foundation
 
@@ -28,7 +26,7 @@ public struct Canvas {
     public init(width: Int, height: Int, fillColor: Color = .black) {
         self.width = width
         self.height = height
-        self.pixels = [[Color]](repeating: [Color](repeating: fillColor, count: width), count: height)
+        pixels = [[Color]](repeating: [Color](repeating: fillColor, count: width), count: height)
     }
 
     // MARK: - Methods

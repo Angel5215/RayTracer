@@ -1,3 +1,4 @@
+// Created on 28/04/23. Last modified in 2023.
 
 import RayTracer
 import XCTest
@@ -232,7 +233,7 @@ class TupleTests: XCTestCase {
         let samples = [
             Tuple(x: 1.690_009, y: 3.520_009, z: 3.120_009, w: 6.920_009),
             Tuple(x: 1.69, y: 3.52, z: 3.12, w: 6.92),
-            Tuple(x: 1.689_991, y: 3.519_991, z: 3.119_991, w: 6.919_991),
+            Tuple(x: 1.689_991, y: 3.519_991, z: 3.119_991, w: 6.919_991)
         ]
         let tuple = Tuple(x: 1.69, y: 3.52, z: 3.12, w: 6.92)
 
@@ -297,4 +298,3 @@ class TupleTests: XCTestCase {
         XCTAssertEqual(result2, Tuple.vector(x: 1, y: -2, z: 1))
     }
 }
-
