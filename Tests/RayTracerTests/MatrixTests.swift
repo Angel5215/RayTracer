@@ -185,6 +185,16 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(minor, 25)
     }
 
+    func test_cofactor_for3x3MatricesCalculatesCorrectly() {
+        let matrix = Matrix3(values: [3, 5, 0, 2, -1, -7, 6, -1, 5])
+
+        let firstCofactor = matrix.cofactor(forRow: 0, andColumn: 0)
+        let secondCofactor = matrix.cofactor(forRow: 1, andColumn: 0)
+
+        XCTAssertEqual(firstCofactor, -12)
+        XCTAssertEqual(secondCofactor, -25)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {

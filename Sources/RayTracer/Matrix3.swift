@@ -28,4 +28,9 @@ public struct Matrix3: Equatable {
     public func minor(forRow row: Int, andColumn column: Int) -> Double {
         submatrix(removingRow: row, andColumn: column).determinant
     }
+
+    public func cofactor(forRow row: Int, andColumn column: Int) -> Double {
+        let sign = (row + column).isMultiple(of: 2) ? 1.0 : -1.0
+        return sign * minor(forRow: row, andColumn: column)
+    }
 }
