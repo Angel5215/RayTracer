@@ -195,6 +195,20 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(secondCofactor, -25)
     }
 
+    func test_determinant_calculatesCorrectlyFor3x3Matrices() {
+        let matrix = Matrix3(values: [1, 2, 6, -5, 8, -4, 2, 6, 4])
+
+        let cofactor00 = matrix.cofactor(forRow: 0, andColumn: 0)
+        let cofactor01 = matrix.cofactor(forRow: 0, andColumn: 1)
+        let cofactor02 = matrix.cofactor(forRow: 0, andColumn: 2)
+        let determinant = matrix.determinant
+
+        XCTAssertEqual(cofactor00, 56)
+        XCTAssertEqual(cofactor01, 12)
+        XCTAssertEqual(cofactor02, -46)
+        XCTAssertEqual(determinant, -196)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {

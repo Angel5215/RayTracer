@@ -4,6 +4,14 @@ public struct Matrix3: Equatable {
     private let dimension = 3
     private let values: [Double]
 
+    public var determinant: Double {
+        var result = 0.0
+        for column in 0..<dimension {
+            result += self[0, column] * cofactor(forRow: 0, andColumn: column)
+        }
+        return result
+    }
+
     public init(values: [Double]) {
         assert(values.count == dimension * dimension, "Matrix should have \(dimension * dimension) values.")
         self.values = values
