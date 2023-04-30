@@ -48,4 +48,16 @@ public struct Matrix4: Equatable {
             self[0, 3], self[1, 3], self[2, 3], self[3, 3]
         ])
     }
+
+    public func submatrix(removingRow row: Int, andColumn column: Int) -> Matrix3 {
+        var newValues = [Double]()
+
+        for currentRow in 0..<dimension where currentRow != row {
+            for currentColumn in 0..<dimension where currentColumn != column {
+                newValues.append(self[currentRow, currentColumn])
+            }
+        }
+
+        return Matrix3(values: newValues)
+    }
 }
