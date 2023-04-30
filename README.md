@@ -73,3 +73,13 @@ swift run projectiles graph --input Examples/Files/graph.json --output ~/Downloa
 # Running without custom file will generate a `projectile.ppm` image in the current directory
 swift run projectiles graph --input Examples/Files/graph.json --width 900 --height 550
 ```
+
+### Chapter 3. Matrices.
+
+Chapter 3 is complete with implementation of matrix primitives (2x2 matrix, 3x3 matrix, and 4x4 matrix) and some of their operations: multiplication of 4x4 matrices, multiplication of 4x4 matrix and tuple, matrix transposition, matrix inversion, obtaining determinants, obtaining submatrices, obtaining minors, and computing cofactors.    
+
+At the end of the chapter there are some experiments to try, these questions are answered with a simple CLI program that can be run with the following command:
+
+```bash
+swift run matrix-experiments 
+```
