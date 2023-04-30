@@ -82,7 +82,8 @@ public struct Matrix4 {
         return sign * minor(forRow: row, andColumn: column)
     }
 
-    public func inverted() -> Matrix4 {
+    public func inverted() -> Matrix4? {
+        guard isInvertible else { return nil }
         let determinant = determinant
         let transposedCofactorMatrix = cofactorMatrix().transposed()
         return Matrix4(values: transposedCofactorMatrix.values.map { value in

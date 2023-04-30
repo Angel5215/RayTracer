@@ -262,6 +262,14 @@ class MatrixTests: XCTestCase {
         ]))
     }
 
+    func test_inverted_failsToProduceInverseMatrixForNonInvertibleMatrices() {
+        let nonInvertibleMatrix = Matrix4(values: [-4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1, -5, 0, 0, 0, 0])
+
+        let inverseMatrix = nonInvertibleMatrix.inverted()
+
+        XCTAssertNil(inverseMatrix)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {
