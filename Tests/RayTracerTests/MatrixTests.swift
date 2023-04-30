@@ -239,6 +239,16 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(determinant, -4071)
     }
 
+    func test_isInvertible_detects4x4MatricesAreInvertible() {
+        let invertibleMatrix = Matrix4(values: [6, 4, 4, 4, 5, 5, 7, 6, 4, -9, 3, -7, 9, 1, 7, -6])
+        XCTAssertEqual(invertibleMatrix.determinant, -2120)
+        XCTAssertTrue(invertibleMatrix.isInvertible)
+
+        let nonInvertibleMatrix = Matrix4(values: [-4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1, -5, 0, 0, 0, 0])
+        XCTAssertEqual(nonInvertibleMatrix.determinant, 0)
+        XCTAssertFalse(nonInvertibleMatrix.isInvertible)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {

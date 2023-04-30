@@ -1,4 +1,4 @@
-// Created on 28/04/23. Last modified in 2023.
+// Created on 29/04/23. Last modified in 2023.
 
 public struct Matrix4: Equatable {
     public static let identity = Matrix4(values: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
@@ -12,6 +12,10 @@ public struct Matrix4: Equatable {
             result += self[0, column] * cofactor(forRow: 0, andColumn: column)
         }
         return result
+    }
+
+    public var isInvertible: Bool {
+        determinant != 0
     }
 
     public init(values: [Double]) {
