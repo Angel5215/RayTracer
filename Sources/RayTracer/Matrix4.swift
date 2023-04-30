@@ -4,7 +4,7 @@ public struct Matrix4 {
     public static let identity = Matrix4(values: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
 
     private let dimension = 4
-    private let values: [Double]
+    private(set) var values: [Double]
 
     public var determinant: Double {
         var result = 0.0
@@ -24,7 +24,11 @@ public struct Matrix4 {
     }
 
     public subscript(row: Int, column: Int) -> Double {
-        values[dimension * row + column]
+        get {
+            values[dimension * row + column]
+        } set {
+            values[dimension * row + column] = newValue
+        }
     }
 
     public func multiplied(by matrix: Matrix4) -> Matrix4 {
@@ -85,20 +89,14 @@ public struct Matrix4 {
     public func inverted() -> Matrix4? {
         guard isInvertible else { return nil }
         let determinant = determinant
-        let transposedCofactorMatrix = cofactorMatrix().transposed()
-        return Matrix4(values: transposedCofactorMatrix.values.map { value in
-            value / determinant
-        })
-    }
 
-    private func cofactorMatrix() -> Matrix4 {
-        var newValues = [Double]()
+        var mutableMatrix = Matrix4(values: [Double](repeating: 0, count: dimension * dimension))
         for row in 0..<dimension {
             for column in 0..<dimension {
-                newValues.append(cofactor(forRow: row, andColumn: column))
+                mutableMatrix[column, row] = cofactor(forRow: row, andColumn: column) / determinant
             }
         }
-        return Matrix4(values: newValues)
+        return mutableMatrix
     }
 }
 
