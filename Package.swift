@@ -26,6 +26,13 @@ let package = Package(
             ],
             path: "Examples/Projectiles"
         ),
+        .executableTarget(
+            name: "matrix-experiments",
+            dependencies: [
+                "RayTracer"
+            ],
+            path: "Examples/MatrixExperiments"
+        ),
         .testTarget(
             name: "RayTracerTests",
             dependencies: ["RayTracer"]
