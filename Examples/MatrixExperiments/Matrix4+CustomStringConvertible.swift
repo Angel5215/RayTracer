@@ -6,18 +6,14 @@ import RayTracer
 extension Matrix4: CustomStringConvertible {
     public var description: String {
         """
-        |\t\(format(self[0, 0]))\t\(format(self[0, 1]))\t\(format(self[0, 2]))\t\(format(self[0, 3]))\t|
-        |\t\(format(self[1, 0]))\t\(format(self[1, 1]))\t\(format(self[1, 2]))\t\(format(self[1, 3]))\t|
-        |\t\(format(self[2, 0]))\t\(format(self[2, 1]))\t\(format(self[2, 2]))\t\(format(self[2, 3]))\t|
-        |\t\(format(self[3, 0]))\t\(format(self[3, 1]))\t\(format(self[3, 2]))\t\(format(self[3, 3]))\t|
+        |\(format(self[0, 0])) \(format(self[0, 1])) \(format(self[0, 2])) \(format(self[0, 3])) |
+        |\(format(self[1, 0])) \(format(self[1, 1])) \(format(self[1, 2])) \(format(self[1, 3])) |
+        |\(format(self[2, 0])) \(format(self[2, 1])) \(format(self[2, 2])) \(format(self[2, 3])) |
+        |\(format(self[3, 0])) \(format(self[3, 1])) \(format(self[3, 2])) \(format(self[3, 3])) |
         """
     }
 
-    private func format(_ number: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.minimumFractionDigits = 5
-        numberFormatter.maximumFractionDigits = 5
-        numberFormatter.positivePrefix = "+"
-        return numberFormatter.string(from: NSDecimalNumber(value: number))!
+    private func format(_ number: Double, using formatter: NumberFormatter = numberFormatter) -> String {
+        numberFormatter.string(from: NSDecimalNumber(value: number))!
     }
 }

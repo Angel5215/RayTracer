@@ -5,26 +5,29 @@ import RayTracer
 
 @main
 enum MatrixExperiment {
+    private static let separator = "-----\n"
+
     static func main() throws {
+        print(separator)
         print("> What happens when you invert the identity matrix?")
         try print(Matrix4.identity.invert())
-        try print("\t>> Is equal to Identity? -> ", Matrix4.identity == Matrix4.identity.invert())
-        print("-----")
+        try print("\n>> Is equal to Identity? -> ", Matrix4.identity == Matrix4.identity.invert())
+        print(separator)
 
         print("> What do you get when you multiply a matrix by its inverse?")
         let matrix = Matrix4(values: [3, -9, 7, 3, 3, -8, 2, -9, -4, 4, 4, 1, -6, 5, -1, 1])
         let inverseMatrix = try matrix.invert()
         print(matrix * inverseMatrix)
-        print("\t>> Is equal to Identity? -> ", matrix * inverseMatrix == Matrix4.identity)
-        print("-----")
+        print("\n>> Is equal to Identity? -> ", matrix * inverseMatrix == Matrix4.identity)
+        print(separator)
 
         print("> Is there any difference between the inverse of the transpose of a matrix, and the transpose of the inverse?")
-        print("\t>> Inverse of the transpose.")
+        print("\n>> Inverse of the transpose.")
         try print(matrix.transposed().invert())
-        print("\t>> Transpose of the inverse.")
+        print("\n>> Transpose of the inverse.")
         try print(matrix.invert().transposed())
-        try print("\t>> Are they equal? -> ", matrix.transposed().invert() == matrix.invert().transposed())
-        print("-----")
+        try print("\n>> Are they equal? -> ", matrix.transposed().invert() == matrix.invert().transposed())
+        print(separator)
 
         print(
             """
@@ -36,12 +39,12 @@ enum MatrixExperiment {
         let tuple = Tuple(x: 1, y: -2, z: 3, w: 4.5)
         var mutableIdentity = Matrix4.identity
         mutableIdentity[1, 1] = 2
-        print("\t>> Tuple")
+        print("\n>> Tuple")
         print(tuple)
-        print("\t>> Modified identity matrix")
+        print("\n>> Modified identity matrix")
         print(mutableIdentity)
-        print("\t>> Multiply modified identity with tuple")
+        print("\n>> Multiply modified identity with tuple")
         print(mutableIdentity * tuple)
-        print("-----")
+        print(separator)
     }
 }
