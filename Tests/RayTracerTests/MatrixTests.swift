@@ -177,6 +177,14 @@ class MatrixTests: XCTestCase {
         }
     }
 
+    func test_minor_for3x3MatricesCalculatesCorrectly() {
+        let matrix = Matrix3(values: [3, 5, 0, 2, -1, -7, 6, -1, 5])
+
+        let minor = matrix.minor(forRow: 1, andColumn: 0)
+
+        XCTAssertEqual(minor, 25)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {

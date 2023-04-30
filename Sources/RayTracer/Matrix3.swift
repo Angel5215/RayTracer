@@ -24,4 +24,8 @@ public struct Matrix3: Equatable {
 
         return Matrix2(values: newValues)
     }
+
+    public func minor(forRow row: Int, andColumn column: Int) -> Double {
+        submatrix(removingRow: row, andColumn: column).determinant
+    }
 }
