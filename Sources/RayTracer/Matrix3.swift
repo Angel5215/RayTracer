@@ -12,4 +12,16 @@ public struct Matrix3: Equatable {
     public subscript(row: Int, column: Int) -> Double {
         values[dimension * row + column]
     }
+
+    public func submatrix(removingRow row: Int, andColumn column: Int) -> Matrix2 {
+        var newValues = [Double]()
+
+        for currentRow in 0..<dimension where currentRow != row {
+            for currentColumn in 0..<dimension where currentColumn != column {
+                newValues.append(self[currentRow, currentColumn])
+            }
+        }
+
+        return Matrix2(values: newValues)
+    }
 }

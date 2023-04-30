@@ -124,6 +124,28 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(determinant, 17)
     }
 
+    func test_submatrix_for3x3MatricesReturn2x2Matrices() {
+        let rowColumnPairs: [(row: Int, column: Int)] = [
+            (0, 0), (0, 1), (0, 2),
+            (1, 0), (1, 1), (1, 2),
+            (2, 0), (2, 1), (2, 2)
+        ]
+
+        let expectedSolutions = [
+            Matrix2(values: [2, 7, 6, -3]), Matrix2(values: [-3, 7, 0, -3]), Matrix2(values: [-3, 2, 0, 6]),
+            Matrix2(values: [5, 0, 6, -3]), Matrix2(values: [1, 0, 0, -3]), Matrix2(values: [1, 5, 0, 6]),
+            Matrix2(values: [5, 0, 2, 7]), Matrix2(values: [1, 0, -3, 7]), Matrix2(values: [1, 5, -3, 2])
+        ]
+
+        for (sample, submatrix) in zip(rowColumnPairs, expectedSolutions) {
+            let matrix = Matrix3(values: [1, 5, 0, -3, 2, 7, 0, 6, -3])
+
+            let result = matrix.submatrix(removingRow: sample.row, andColumn: sample.column)
+
+            XCTAssertEqual(result, submatrix)
+        }
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {
