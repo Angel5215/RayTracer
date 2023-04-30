@@ -1,6 +1,6 @@
 // Created on 29/04/23. Last modified in 2023.
 
-public struct Matrix4: Equatable {
+public struct Matrix4 {
     public static let identity = Matrix4(values: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1])
 
     private let dimension = 4
@@ -80,5 +80,33 @@ public struct Matrix4: Equatable {
     public func cofactor(forRow row: Int, andColumn column: Int) -> Double {
         let sign = (row + column).isMultiple(of: 2) ? 1.0 : -1.0
         return sign * minor(forRow: row, andColumn: column)
+    }
+
+    public func inverted() -> Matrix4 {
+        let determinant = determinant
+        let transposedCofactorMatrix = cofactorMatrix().transposed()
+        return Matrix4(values: transposedCofactorMatrix.values.map { value in
+            value / determinant
+        })
+    }
+
+    private func cofactorMatrix() -> Matrix4 {
+        var newValues = [Double]()
+        for row in 0..<dimension {
+            for column in 0..<dimension {
+                newValues.append(cofactor(forRow: row, andColumn: column))
+            }
+        }
+        return Matrix4(values: newValues)
+    }
+}
+
+extension Matrix4: Equatable {
+    public static func == (lhs: Matrix4, rhs: Matrix4) -> Bool {
+        zip(lhs.values, rhs.values).allSatisfy { lhs, rhs in isAlmostEqual(lhs: lhs, rhs: rhs) }
+    }
+
+    private static func isAlmostEqual(lhs: Double, rhs: Double, epsilon: Double = 1e-5) -> Bool {
+        abs(lhs - rhs) < epsilon
     }
 }
