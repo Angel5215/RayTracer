@@ -286,6 +286,17 @@ class MatrixTests: XCTestCase {
         XCTAssertNil(inverseMatrix)
     }
 
+    func test_multiplyingProductWithInverseMatrix_restoresOriginalMatrix() throws {
+        let matrixA = Matrix4(values: [3, -9, 7, 3, 3, -8, 2, -9, -4, 4, 4, 1, -6, 5, -1, 1])
+        let matrixB = Matrix4(values: [8, 2, 2, 2, 3, -1, 7, 0, 7, 0, 5, 4, 6, -2, 0, 5])
+        let matrixC = matrixA * matrixB
+
+        let inverseMatrixB = try XCTUnwrap(matrixB.inverted(), "Matrix B should be invertible.")
+        let result = matrixC * inverseMatrixB
+
+        XCTAssertEqual(result, matrixA)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {
