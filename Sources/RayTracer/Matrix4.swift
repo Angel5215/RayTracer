@@ -6,6 +6,14 @@ public struct Matrix4: Equatable {
     private let dimension = 4
     private let values: [Double]
 
+    public var determinant: Double {
+        var result = 0.0
+        for column in 0..<dimension {
+            result += self[0, column] * cofactor(forRow: 0, andColumn: column)
+        }
+        return result
+    }
+
     public init(values: [Double]) {
         assert(values.count == dimension * dimension, "Matrix should have \(dimension * dimension) values.")
         self.values = values
@@ -59,5 +67,14 @@ public struct Matrix4: Equatable {
         }
 
         return Matrix3(values: newValues)
+    }
+
+    public func minor(forRow row: Int, andColumn column: Int) -> Double {
+        submatrix(removingRow: row, andColumn: column).determinant
+    }
+
+    public func cofactor(forRow row: Int, andColumn column: Int) -> Double {
+        let sign = (row + column).isMultiple(of: 2) ? 1.0 : -1.0
+        return sign * minor(forRow: row, andColumn: column)
     }
 }

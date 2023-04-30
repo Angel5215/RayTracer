@@ -209,6 +209,36 @@ class MatrixTests: XCTestCase {
         XCTAssertEqual(determinant, -196)
     }
 
+    func test_minor_for4x4MatricesCalculatesCorrectly() {
+        let matrix = Matrix4(values: [-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9])
+
+        let minor = matrix.minor(forRow: 0, andColumn: 2)
+
+        XCTAssertEqual(minor, 210)
+    }
+
+    func test_cofactor_for4x4MatricesCalculatesCorrectly() {
+        let matrix = Matrix4(values: [-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9])
+
+        let cofactor00 = matrix.cofactor(forRow: 0, andColumn: 0)
+        let cofactor01 = matrix.cofactor(forRow: 0, andColumn: 1)
+        let cofactor02 = matrix.cofactor(forRow: 0, andColumn: 2)
+        let cofactor03 = matrix.cofactor(forRow: 0, andColumn: 3)
+
+        XCTAssertEqual(cofactor00, 690)
+        XCTAssertEqual(cofactor01, 447)
+        XCTAssertEqual(cofactor02, 210)
+        XCTAssertEqual(cofactor03, 51)
+    }
+
+    func test_determinant_calculatesCorrectlyFor4x4Matrices() {
+        let matrix = Matrix4(values: [-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9])
+
+        let determinant = matrix.determinant
+
+        XCTAssertEqual(determinant, -4071)
+    }
+
     // MARK: - Tests with operators
 
     func test_multipliedByMatrixWithOperator_returnsNewMatrix() {
