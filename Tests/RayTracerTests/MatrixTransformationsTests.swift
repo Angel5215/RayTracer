@@ -19,7 +19,7 @@ final class MatrixTransformationsTests: XCTestCase {
         let transform = translation(x: 5, y: -3, z: 2)
         let initialPoint = point(x: -3, y: 4, z: 5)
 
-        let result = transform.inverted()! * initialPoint
+        let result = transform.unsafeInverted() * initialPoint
 
         XCTAssertEqual(result, point(x: -8, y: 7, z: 3))
     }
@@ -57,7 +57,7 @@ final class MatrixTransformationsTests: XCTestCase {
         let transform = scaling(x: 2, y: 3, z: 4)
         let initialVector = vector(x: -4, y: 6, z: 8)
 
-        let result = transform.inverted()! * initialVector
+        let result = transform.unsafeInverted() * initialVector
 
         XCTAssertEqual(result, vector(x: -2, y: 2, z: 2))
     }

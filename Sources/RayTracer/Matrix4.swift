@@ -88,6 +88,10 @@ public struct Matrix4 {
 
     public func inverted() -> Matrix4? {
         guard isInvertible else { return nil }
+        return unsafeInverted()
+    }
+
+    public func unsafeInverted() -> Matrix4 {
         let determinant = determinant
 
         var mutableMatrix = Matrix4(values: [Double](repeating: 0, count: dimension * dimension))

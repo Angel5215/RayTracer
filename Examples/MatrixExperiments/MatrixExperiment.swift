@@ -10,23 +10,23 @@ enum MatrixExperiment {
     static func main() throws {
         print(separator)
         print("> What happens when you invert the identity matrix?")
-        try print(Matrix4.identity.invert())
-        try print("\n>> Is equal to Identity? -> ", Matrix4.identity == Matrix4.identity.invert())
+        print(Matrix4.identity.unsafeInverted())
+        print("\n>> Is equal to Identity? -> ", Matrix4.identity == Matrix4.identity.unsafeInverted())
         print(separator)
 
         print("> What do you get when you multiply a matrix by its inverse?")
         let matrix = Matrix4(values: [3, -9, 7, 3, 3, -8, 2, -9, -4, 4, 4, 1, -6, 5, -1, 1])
-        let inverseMatrix = try matrix.invert()
+        let inverseMatrix = matrix.unsafeInverted()
         print(matrix * inverseMatrix)
         print("\n>> Is equal to Identity? -> ", matrix * inverseMatrix == Matrix4.identity)
         print(separator)
 
         print("> Is there any difference between the inverse of the transpose of a matrix, and the transpose of the inverse?")
         print("\n>> Inverse of the transpose.")
-        try print(matrix.transposed().invert())
+        print(matrix.transposed().unsafeInverted())
         print("\n>> Transpose of the inverse.")
-        try print(matrix.invert().transposed())
-        try print("\n>> Are they equal? -> ", matrix.transposed().invert() == matrix.invert().transposed())
+        print(matrix.unsafeInverted().transposed())
+        print("\n>> Are they equal? -> ", matrix.transposed().unsafeInverted() == matrix.unsafeInverted().transposed())
         print(separator)
 
         print(

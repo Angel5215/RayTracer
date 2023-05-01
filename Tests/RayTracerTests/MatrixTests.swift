@@ -291,8 +291,7 @@ class MatrixTests: XCTestCase {
         let matrixB = Matrix4(values: [8, 2, 2, 2, 3, -1, 7, 0, 7, 0, 5, 4, 6, -2, 0, 5])
         let matrixC = matrixA * matrixB
 
-        let inverseMatrixB = try XCTUnwrap(matrixB.inverted(), "Matrix B should be invertible.")
-        let result = matrixC * inverseMatrixB
+        let result = matrixC * matrixB.unsafeInverted()
 
         XCTAssertEqual(result, matrixA)
     }
