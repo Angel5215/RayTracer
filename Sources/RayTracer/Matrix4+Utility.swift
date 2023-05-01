@@ -15,3 +15,7 @@ public func rotationX(radians: Double) -> Matrix4 {
 public func rotationY(radians: Double) -> Matrix4 {
     .rotationY(radians: radians)
 }
+
+public func rotationZ(radians: Double) -> Matrix4 {
+    .rotationZ(radians: radians)
+}

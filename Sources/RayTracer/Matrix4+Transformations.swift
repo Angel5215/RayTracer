@@ -42,4 +42,16 @@ public extension Matrix4 {
         transform[2, 2] = cosine
         return transform
     }
+
+    static func rotationZ(radians: Double) -> Self {
+        let cosine = cos(radians)
+        let sine = sin(radians)
+
+        var transform = identity
+        transform[0, 0] = cosine
+        transform[0, 1] = -sine
+        transform[1, 0] = sine
+        transform[1, 1] = cosine
+        return transform
+    }
 }
