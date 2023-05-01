@@ -19,3 +19,7 @@ public func rotationY(radians: Double) -> Matrix4 {
 public func rotationZ(radians: Double) -> Matrix4 {
     .rotationZ(radians: radians)
 }
+
+public func shearing(xy: Double, xz: Double, yx: Double, yz: Double, zx: Double, zy: Double) -> Matrix4 {
+    .shearing(xy: xy, xz: xz, yx: yx, yz: yz, zx: zx, zy: zy)
+}

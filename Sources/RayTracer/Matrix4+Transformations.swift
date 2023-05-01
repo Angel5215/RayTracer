@@ -54,4 +54,15 @@ public extension Matrix4 {
         transform[1, 1] = cosine
         return transform
     }
+
+    static func shearing(xy: Double, xz: Double, yx: Double, yz: Double, zx: Double, zy: Double) -> Self {
+        var transform = identity
+        transform[0, 1] = xy
+        transform[0, 2] = xz
+        transform[1, 0] = yx
+        transform[1, 2] = yz
+        transform[2, 0] = zx
+        transform[2, 1] = zy
+        return transform
+    }
 }

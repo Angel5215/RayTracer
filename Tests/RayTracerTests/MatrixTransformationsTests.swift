@@ -111,4 +111,60 @@ final class MatrixTransformationsTests: XCTestCase {
         XCTAssertEqual(result1, point(x: -sqrt(2) / 2, y: sqrt(2) / 2, z: 0))
         XCTAssertEqual(result2, point(x: -1, y: 0, z: 0))
     }
+
+    // MARK: - Shearing / Skew
+
+    func test_shearing_multiplyingPointMovesXInProportionToY() {
+        let transform = shearing(xy: 1, xz: 0, yx: 0, yz: 0, zx: 0, zy: 0)
+        let initialPoint = point(x: 2, y: 3, z: 4)
+
+        let result = transform * initialPoint
+
+        XCTAssertEqual(result, point(x: 5, y: 3, z: 4))
+    }
+
+    func test_shearing_multiplyingPointMovesXInProportionToZ() {
+        let transform = shearing(xy: 0, xz: 1, yx: 0, yz: 0, zx: 0, zy: 0)
+        let initialPoint = point(x: 2, y: 3, z: 4)
+
+        let result = transform * initialPoint
+
+        XCTAssertEqual(result, point(x: 6, y: 3, z: 4))
+    }
+
+    func test_shearing_multiplyingPointMovesYInProportionToX() {
+        let transform = shearing(xy: 0, xz: 0, yx: 1, yz: 0, zx: 0, zy: 0)
+        let initialPoint = point(x: 2, y: 3, z: 4)
+
+        let result = transform * initialPoint
+
+        XCTAssertEqual(result, point(x: 2, y: 5, z: 4))
+    }
+
+    func test_shearing_multiplyingPointMovesYInProportionToZ() {
+        let transform = shearing(xy: 0, xz: 0, yx: 0, yz: 1, zx: 0, zy: 0)
+        let initialPoint = point(x: 2, y: 3, z: 4)
+
+        let result = transform * initialPoint
+
+        XCTAssertEqual(result, point(x: 2, y: 7, z: 4))
+    }
+
+    func test_shearing_multiplyingPointMovesZInProportionToX() {
+        let transform = shearing(xy: 0, xz: 0, yx: 0, yz: 0, zx: 1, zy: 0)
+        let initialPoint = point(x: 2, y: 3, z: 4)
+
+        let result = transform * initialPoint
+
+        XCTAssertEqual(result, point(x: 2, y: 3, z: 6))
+    }
+
+    func test_shearing_multiplyingPointMovesZInProportionToY() {
+        let transform = shearing(xy: 0, xz: 0, yx: 0, yz: 0, zx: 0, zy: 1)
+        let initialPoint = point(x: 2, y: 3, z: 4)
+
+        let result = transform * initialPoint
+
+        XCTAssertEqual(result, point(x: 2, y: 3, z: 7))
+    }
 }
