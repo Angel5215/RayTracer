@@ -10,4 +10,12 @@ public extension Matrix4 {
         translationMatrix[2, 3] = z
         return translationMatrix
     }
+
+    static func scaling(x: Double, y: Double, z: Double) -> Self {
+        var translationMatrix = identity
+        translationMatrix[0, 0] = x
+        translationMatrix[1, 1] = y
+        translationMatrix[2, 2] = z
+        return translationMatrix
+    }
 }
