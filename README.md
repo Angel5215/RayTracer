@@ -83,3 +83,30 @@ At the end of the chapter there are some experiments to try, these questions are
 ```bash
 swift run matrix-experiments 
 ```
+
+### Chapter 4. Matrices.
+
+Chapter 3 is complete with implementation of matrix transformations (translation, scaling, rotation, and shearing). This operations can also be chained. Normally, chained operations need to be written in reverse order to perform the desired calculation - this is counterintuitive so, in order to have better readability, a composition operator `>>>` is introduced to allow chaining transformation matrices while writing them in natural order.
+
+For example, to chain translation, rotation in X and scaling there are now two ways of doing:
+
+```swift
+// In reverse order using * 
+let normalTransform = scaling(x: 5, y: 1, z: 1) * rotationX(radians: .pi / 2) * translation(x: 1, y: 1, z: 1)
+
+// More intuitive using >>>
+let transform = translation(x: 1, y: 1, z: 1) >>> rotationX(radians: .pi / 2) >>> scaling(x: 5, y: 1, z: 1)
+
+print(normalTransform * point(x: 1, y: 1, z: 1))
+print(transform * point(x: 1, y: 1, z: 1))
+```
+
+To test these operations, a simple CLI tool to generate a "clock" by rotating and scaling a point was created. It generates a PPM file using the canvas from chapter 2. The radius for rotation is 3/8 the size of the specified canvas. You can run it like this:
+
+```bash
+swift run matrix-transformations --canvas-size 50 --output ~/Downloads/clock2.ppm
+```
+
+*The previous command generates the following image*:
+
+![PPM clock from canvas](resources/img/README/06-clock-ppm.png)
