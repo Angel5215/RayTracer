@@ -88,3 +88,6 @@ fabric.properties
 
 # Generated image files
 *.ppm
+
+# Generated test reports
+/junit-reports
