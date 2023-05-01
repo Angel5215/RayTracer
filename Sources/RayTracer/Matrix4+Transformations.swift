@@ -4,65 +4,65 @@ import Foundation
 
 public extension Matrix4 {
     static func translation(x: Double, y: Double, z: Double) -> Self {
-        var translationMatrix = identity
-        translationMatrix[0, 3] = x
-        translationMatrix[1, 3] = y
-        translationMatrix[2, 3] = z
-        return translationMatrix
+        Matrix4(values: [
+            1, 0, 0, x,
+            0, 1, 0, y,
+            0, 0, 1, z,
+            0, 0, 0, 1
+        ])
     }
 
     static func scaling(x: Double, y: Double, z: Double) -> Self {
-        var translationMatrix = identity
-        translationMatrix[0, 0] = x
-        translationMatrix[1, 1] = y
-        translationMatrix[2, 2] = z
-        return translationMatrix
+        Matrix4(values: [
+            x, 0, 0, 0,
+            0, y, 0, 0,
+            0, 0, z, 0,
+            0, 0, 0, 1
+        ])
     }
 
     static func rotationX(radians: Double) -> Self {
-        let cosine = cos(radians)
-        let sine = sin(radians)
+        let cos = cos(radians)
+        let sin = sin(radians)
 
-        var transform = identity
-        transform[1, 1] = cosine
-        transform[1, 2] = -sine
-        transform[2, 1] = sine
-        transform[2, 2] = cosine
-        return transform
+        return Matrix4(values: [
+            1, 0, 0, 0,
+            0, cos, -sin, 0,
+            0, sin, cos, 0,
+            0, 0, 0, 1
+        ])
     }
 
     static func rotationY(radians: Double) -> Self {
-        let cosine = cos(radians)
-        let sine = sin(radians)
+        let cos = cos(radians)
+        let sin = sin(radians)
 
-        var transform = identity
-        transform[0, 0] = cosine
-        transform[0, 2] = sine
-        transform[2, 0] = -sine
-        transform[2, 2] = cosine
-        return transform
+        return Matrix4(values: [
+            cos, 0, sin, 0,
+            0, 1, 0, 0,
+            -sin, 0, cos, 0,
+            0, 0, 0, 1
+        ])
     }
 
     static func rotationZ(radians: Double) -> Self {
-        let cosine = cos(radians)
-        let sine = sin(radians)
+        let cos = cos(radians)
+        let sin = sin(radians)
 
-        var transform = identity
-        transform[0, 0] = cosine
-        transform[0, 1] = -sine
-        transform[1, 0] = sine
-        transform[1, 1] = cosine
-        return transform
+        return Matrix4(values: [
+            cos, -sin, 0, 0,
+            sin, cos, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        ])
     }
 
     static func shearing(xy: Double, xz: Double, yx: Double, yz: Double, zx: Double, zy: Double) -> Self {
-        var transform = identity
-        transform[0, 1] = xy
-        transform[0, 2] = xz
-        transform[1, 0] = yx
-        transform[1, 2] = yz
-        transform[2, 0] = zx
-        transform[2, 1] = zy
-        return transform
+        Matrix4(values: [
+            1, xy, xz, 0,
+            yx, 1, yz, 0,
+            zx, zy, 1, 0,
+            0, 0, 0, 1
+        ])
     }
 }
