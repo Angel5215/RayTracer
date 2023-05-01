@@ -33,6 +33,14 @@ let package = Package(
             ],
             path: "Examples/MatrixExperiments"
         ),
+        .executableTarget(
+            name: "matrix-transformations",
+            dependencies: [
+                "RayTracer",
+                .product(name: "ArgumentParser", package: "swift-argument-parser")
+            ],
+            path: "Examples/MatrixTransformations"
+        ),
         .testTarget(
             name: "RayTracerTests",
             dependencies: ["RayTracer"]
