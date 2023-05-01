@@ -87,4 +87,16 @@ final class MatrixTransformationsTests: XCTestCase {
         XCTAssertEqual(result1, point(x: 0, y: sqrt(2) / 2, z: -sqrt(2) / 2))
         XCTAssertEqual(result2, point(x: 0, y: 0, z: -1))
     }
+
+    func test_rotationY_multiplyingTupleRotatesTupleAroundYAxis() {
+        let initialPoint = point(x: 0, y: 0, z: 1)
+        let halfQuarter = rotationY(radians: .pi / 4)
+        let fullQuarter = rotationY(radians: .pi / 2)
+
+        let result1 = halfQuarter * initialPoint
+        let result2 = fullQuarter * initialPoint
+
+        XCTAssertEqual(result1, point(x: sqrt(2) / 2, y: 0, z: sqrt(2) / 2))
+        XCTAssertEqual(result2, point(x: 1, y: 0, z: 0))
+    }
 }

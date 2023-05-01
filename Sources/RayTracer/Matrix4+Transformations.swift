@@ -30,4 +30,16 @@ public extension Matrix4 {
         transform[2, 2] = cosine
         return transform
     }
+
+    static func rotationY(radians: Double) -> Self {
+        let cosine = cos(radians)
+        let sine = sin(radians)
+
+        var transform = identity
+        transform[0, 0] = cosine
+        transform[0, 2] = sine
+        transform[2, 0] = -sine
+        transform[2, 2] = cosine
+        return transform
+    }
 }

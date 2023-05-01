@@ -11,3 +11,7 @@ public func scaling(x: Double, y: Double, z: Double) -> Matrix4 {
 public func rotationX(radians: Double) -> Matrix4 {
     .rotationX(radians: radians)
 }
+
+public func rotationY(radians: Double) -> Matrix4 {
+    .rotationY(radians: radians)
+}
