@@ -195,4 +195,15 @@ final class MatrixTransformationsTests: XCTestCase {
 
         XCTAssertEqual(result, point(x: 15, y: 0, z: 7))
     }
+
+    func test_chainedTransformations_withCompositionOperatorAreAppliedInNormalOrder() {
+        let initialPoint = point(x: 1, y: 0, z: 1)
+        let rotationX = rotationX(radians: .pi / 2)
+        let scaling = scaling(x: 5, y: 5, z: 5)
+        let translation = translation(x: 10, y: 5, z: 7)
+
+        let result = rotationX >>> scaling >>> translation * initialPoint
+
+        XCTAssertEqual(result, point(x: 15, y: 0, z: 7))
+    }
 }

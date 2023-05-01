@@ -11,7 +11,13 @@ precedencegroup CrossProductPrecedence {
     associativity: left
 }
 
+precedencegroup CompositionPrecedence {
+    higherThan: DotProductPrecedence
+    associativity: left
+}
+
 // MARK: - Operators
 
 infix operator .*: DotProductPrecedence
 infix operator +*: CrossProductPrecedence
+infix operator >>>: CompositionPrecedence
