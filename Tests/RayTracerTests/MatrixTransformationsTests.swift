@@ -36,7 +36,7 @@ final class MatrixTransformationsTests: XCTestCase {
     // MARK: - Scaling
 
     func test_scalingMatrix_multiplyingPointScalesThePoint() {
-        let transform = Matrix4.scaling(x: 2, y: 3, z: 4)
+        let transform = scaling(x: 2, y: 3, z: 4)
         let initialPoint = point(x: -4, y: 6, z: 8)
 
         let result = transform * initialPoint
@@ -45,7 +45,7 @@ final class MatrixTransformationsTests: XCTestCase {
     }
 
     func test_scalingMatrix_multiplyingVectorScalesTheVector() {
-        let transform = Matrix4.scaling(x: 2, y: 3, z: 4)
+        let transform = scaling(x: 2, y: 3, z: 4)
         let initialVector = vector(x: -4, y: 6, z: 8)
 
         let result = transform * initialVector
@@ -54,7 +54,7 @@ final class MatrixTransformationsTests: XCTestCase {
     }
 
     func test_scalingMatrix_multiplyingInverseByTupleScalesTupleInTheInverseWay() {
-        let transform = Matrix4.scaling(x: 2, y: 3, z: 4)
+        let transform = scaling(x: 2, y: 3, z: 4)
         let initialVector = vector(x: -4, y: 6, z: 8)
 
         let result = transform.inverted()! * initialVector
