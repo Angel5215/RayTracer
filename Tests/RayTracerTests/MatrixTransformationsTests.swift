@@ -167,4 +167,32 @@ final class MatrixTransformationsTests: XCTestCase {
 
         XCTAssertEqual(result, point(x: 2, y: 3, z: 7))
     }
+
+    func test_chainedTransformations_individualTransformationsAreAppliedInSequence() {
+        let initialPoint = point(x: 1, y: 0, z: 1)
+        let rotationX = rotationX(radians: .pi / 2)
+        let scaling = scaling(x: 5, y: 5, z: 5)
+        let translation = translation(x: 10, y: 5, z: 7)
+
+        let rotated = rotationX * initialPoint
+        XCTAssertEqual(rotated, point(x: 1, y: -1, z: 0))
+
+        let scaled = scaling * rotated
+        XCTAssertEqual(scaled, point(x: 5, y: -5, z: 0))
+
+        let translated = translation * scaled
+        XCTAssertEqual(translated, point(x: 15, y: 0, z: 7))
+    }
+
+    func test_chainedTransformations_shouldBeAppliedInReverseOrder() {
+        let initialPoint = point(x: 1, y: 0, z: 1)
+        let rotationX = rotationX(radians: .pi / 2)
+        let scaling = scaling(x: 5, y: 5, z: 5)
+        let translation = translation(x: 10, y: 5, z: 7)
+
+        let transform = translation * scaling * rotationX
+        let result = transform * initialPoint
+
+        XCTAssertEqual(result, point(x: 15, y: 0, z: 7))
+    }
 }
