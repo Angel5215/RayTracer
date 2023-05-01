@@ -18,4 +18,16 @@ public extension Matrix4 {
         translationMatrix[2, 2] = z
         return translationMatrix
     }
+
+    static func rotationX(radians: Double) -> Self {
+        let cosine = cos(radians)
+        let sine = sin(radians)
+
+        var transform = identity
+        transform[1, 1] = cosine
+        transform[1, 2] = -sine
+        transform[2, 1] = sine
+        transform[2, 2] = cosine
+        return transform
+    }
 }

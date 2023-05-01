@@ -61,4 +61,30 @@ final class MatrixTransformationsTests: XCTestCase {
 
         XCTAssertEqual(result, vector(x: -2, y: 2, z: 2))
     }
+
+    // MARK: - Rotation
+
+    func test_rotationX_multiplyingTupleRotatesTupleAroundXAxis() {
+        let initialPoint = point(x: 0, y: 1, z: 0)
+        let halfQuarter = rotationX(radians: .pi / 4)
+        let fullQuarter = rotationX(radians: .pi / 2)
+
+        let result1 = halfQuarter * initialPoint
+        let result2 = fullQuarter * initialPoint
+
+        XCTAssertEqual(result1, point(x: 0, y: sqrt(2) / 2, z: sqrt(2) / 2))
+        XCTAssertEqual(result2, point(x: 0, y: 0, z: 1))
+    }
+
+    func test_rotationX_multiplyingInverseWithTupleRotatesInOppositeDirection() {
+        let initialPoint = point(x: 0, y: 1, z: 0)
+        let halfQuarter = rotationX(radians: .pi / 4)
+        let fullQuarter = rotationX(radians: .pi / 2)
+
+        let result1 = halfQuarter.unsafeInverted() * initialPoint
+        let result2 = fullQuarter.unsafeInverted() * initialPoint
+
+        XCTAssertEqual(result1, point(x: 0, y: sqrt(2) / 2, z: -sqrt(2) / 2))
+        XCTAssertEqual(result2, point(x: 0, y: 0, z: -1))
+    }
 }
