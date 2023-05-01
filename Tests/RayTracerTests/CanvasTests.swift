@@ -65,6 +65,14 @@ class CanvasTests: XCTestCase {
         ])
     }
 
+    func test_ppm_ensurePPMDoesNotContainLinesWithMoreThan70Characters() {
+        let canvas = Canvas(width: 50, height: 2)
+
+        let lines = canvas.ppm.split(separator: "\n")
+
+        XCTAssertTrue(lines.allSatisfy { $0.count <= 70 })
+    }
+
     func test_ppm_splitsLinesSoThatNoneAreMoreThan70CharactersLongWhenCharacter70IsSpace() {
         let canvas = Canvas(width: 10, height: 2, fillColor: color(red: 0.047, green: 0.047, blue: 0.019))
 

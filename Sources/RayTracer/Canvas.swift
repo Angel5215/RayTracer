@@ -62,13 +62,24 @@ public struct Canvas {
         let maxLineLength = 70
         guard line.count > maxLineLength else { return [line] }
 
-        let startIndex = line.startIndex
-        let maxLengthIndex = line.index(startIndex, offsetBy: maxLineLength - 1)
+        var newLines = [String]()
+        var remainingLine = line
 
-        let space: Character = " "
-        let lastSpaceIndex = line[startIndex...maxLengthIndex].lastIndex(of: space)!
+        while remainingLine.count > maxLineLength {
+            let startIndex = remainingLine.startIndex
+            let maxLengthIndex = remainingLine.index(startIndex, offsetBy: maxLineLength - 1)
 
-        let newLines = [line[startIndex..<lastSpaceIndex], line[lastSpaceIndex...]]
-        return newLines.map { substring in String(substring.trimmingCharacters(in: .whitespaces)) }
+            let space: Character = " "
+            let lastSpaceIndex = remainingLine[startIndex...maxLengthIndex].lastIndex(of: space)!
+
+            newLines.append(String(remainingLine[startIndex..<lastSpaceIndex]).trimmingCharacters(in: .whitespaces))
+            remainingLine = String(remainingLine[lastSpaceIndex...]).trimmingCharacters(in: .whitespaces)
+        }
+
+        if remainingLine != "" {
+            newLines.append(remainingLine.trimmingCharacters(in: .whitespaces))
+        }
+
+        return newLines
     }
 }
