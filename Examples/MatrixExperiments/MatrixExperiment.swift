@@ -36,7 +36,7 @@ enum MatrixExperiment {
             to a different number, and then multiplying it by a tuple. What happens to the tuple?
             """
         )
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: 4.5)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: 4.5)
         var mutableIdentity = Matrix4.identity
         mutableIdentity[1, 1] = 2
         print("\n>> Tuple")
