@@ -1,4 +1,4 @@
-// Created on 28/04/23. Last modified in 2023.
+// Created on 13/05/23. Last modified in 2023.
 
 public struct Tuple {
     public let x: Double
@@ -15,7 +15,7 @@ public struct Tuple {
     public var isPoint: Bool { w == 1 }
     public var isVector: Bool { w == 0 }
 
-    public init(x: Double, y: Double, z: Double, w: Double) {
+    init(x: Double, y: Double, z: Double, w: Double) {
         self.x = x
         self.y = y
         self.z = z

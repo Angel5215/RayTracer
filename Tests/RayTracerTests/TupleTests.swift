@@ -1,11 +1,11 @@
-// Created on 28/04/23. Last modified in 2023.
+// Created on 13/05/23. Last modified in 2023.
 
 import RayTracer
 import XCTest
 
 class TupleTests: XCTestCase {
     func test_init_withLastComponentOneIsPoint() {
-        let tuple = Tuple(x: 4.3, y: -4.2, z: 3.1, w: 1)
+        let tuple = Tuple.make(x: 4.3, y: -4.2, z: 3.1, w: 1)
 
         XCTAssertEqual(tuple.x, 4.3)
         XCTAssertEqual(tuple.y, -4.2)
@@ -16,7 +16,7 @@ class TupleTests: XCTestCase {
     }
 
     func test_init_withLastComponentZeroIsVector() {
-        let tuple = Tuple(x: 4.3, y: -4.2, z: 3.1, w: 0)
+        let tuple = Tuple.make(x: 4.3, y: -4.2, z: 3.1, w: 0)
 
         XCTAssertEqual(tuple.x, 4.3)
         XCTAssertEqual(tuple.y, -4.2)
@@ -47,12 +47,12 @@ class TupleTests: XCTestCase {
     // MARK: - Operations with methods
 
     func test_adding_addsCorrespondingComponentsOfTuples() {
-        let tuple1 = Tuple(x: 3, y: -2, z: 5, w: 1)
-        let tuple2 = Tuple(x: -2, y: 3, z: 1, w: 0)
+        let tuple1 = Tuple.make(x: 3, y: -2, z: 5, w: 1)
+        let tuple2 = Tuple.make(x: -2, y: 3, z: 1, w: 0)
 
         let result = tuple1.adding(tuple2)
 
-        XCTAssertEqual(result, Tuple(x: 1, y: 1, z: 6, w: 1))
+        XCTAssertEqual(result, .make(x: 1, y: 1, z: 6, w: 1))
     }
 
     func test_subtractingPoints_subtractsCorrespondingElementsOfTuples() {
@@ -61,7 +61,7 @@ class TupleTests: XCTestCase {
 
         let result = tuple1.subtracting(tuple2)
 
-        XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
+        XCTAssertEqual(result, .vector(x: -2, y: -4, z: -6))
     }
 
     func test_subtractingVectorFromPoint_subtractsCorrespondingElementsOfTuples() {
@@ -70,7 +70,7 @@ class TupleTests: XCTestCase {
 
         let result = tuple1.subtracting(tuple2)
 
-        XCTAssertEqual(result, Tuple.point(x: -2, y: -4, z: -6))
+        XCTAssertEqual(result, .point(x: -2, y: -4, z: -6))
     }
 
     func test_subtractingVectors_subtractsCorrespondingElementsOfTuples() {
@@ -79,50 +79,50 @@ class TupleTests: XCTestCase {
 
         let result = tuple1.subtracting(tuple2)
 
-        XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
+        XCTAssertEqual(result, .vector(x: -2, y: -4, z: -6))
     }
 
     func test_negate_negatesEachComponentOfTuple() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let result = tuple.negated()
 
-        XCTAssertEqual(result, Tuple(x: -1, y: 2, z: -3, w: 4))
+        XCTAssertEqual(result, .make(x: -1, y: 2, z: -3, w: 4))
     }
 
     func test_multipliedByScalar_scalesTupleComponents() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let result = tuple.multiplied(by: 3.5)
 
-        XCTAssertEqual(result, Tuple(x: 3.5, y: -7, z: 10.5, w: -14))
+        XCTAssertEqual(result, .make(x: 3.5, y: -7, z: 10.5, w: -14))
     }
 
     func test_multipliedByFraction_scalesTupleComponents() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let result = tuple.multiplied(by: 0.5)
 
-        XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
+        XCTAssertEqual(result, .make(x: 0.5, y: -1, z: 1.5, w: -2))
     }
 
     func test_dividedByFactor_scalesTupleComponents() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let result = tuple.divided(by: 2)
 
-        XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
+        XCTAssertEqual(result, .make(x: 0.5, y: -1, z: 1.5, w: -2))
     }
 
     // MARK: - Operations with operators
 
     func test_addingWithOperator_generatesCorrectResults() {
-        let tuple1 = Tuple(x: 3, y: -2, z: 5, w: 1)
-        let tuple2 = Tuple(x: -2, y: 3, z: 1, w: 0)
+        let tuple1 = Tuple.make(x: 3, y: -2, z: 5, w: 1)
+        let tuple2 = Tuple.make(x: -2, y: 3, z: 1, w: 0)
 
         let result = tuple1 + tuple2
 
-        XCTAssertEqual(result, Tuple(x: 1, y: 1, z: 6, w: 1))
+        XCTAssertEqual(result, .make(x: 1, y: 1, z: 6, w: 1))
     }
 
     func test_subtractingPointsWithOperator_generatesCorrectResults() {
@@ -131,7 +131,7 @@ class TupleTests: XCTestCase {
 
         let result = tuple1 - tuple2
 
-        XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
+        XCTAssertEqual(result, .vector(x: -2, y: -4, z: -6))
     }
 
     func test_subtractingVectorFromPointWithOperator_generatesCorrectResults() {
@@ -140,7 +140,7 @@ class TupleTests: XCTestCase {
 
         let result = tuple1 - tuple2
 
-        XCTAssertEqual(result, Tuple.point(x: -2, y: -4, z: -6))
+        XCTAssertEqual(result, .point(x: -2, y: -4, z: -6))
     }
 
     func test_subtractingVectorsWithOperator_generatesCorrectResults() {
@@ -149,7 +149,7 @@ class TupleTests: XCTestCase {
 
         let result = tuple1 - tuple2
 
-        XCTAssertEqual(result, Tuple.vector(x: -2, y: -4, z: -6))
+        XCTAssertEqual(result, .vector(x: -2, y: -4, z: -6))
     }
 
     func test_negate_bySubtractingFromVectorZero() {
@@ -158,43 +158,43 @@ class TupleTests: XCTestCase {
 
         let result = zero - vector
 
-        XCTAssertEqual(result, Tuple.vector(x: -1, y: 2, z: -3))
+        XCTAssertEqual(result, .vector(x: -1, y: 2, z: -3))
     }
 
     func test_negate_generatesCorrectResults() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let result = -tuple
 
-        XCTAssertEqual(result, Tuple(x: -1, y: 2, z: -3, w: 4))
+        XCTAssertEqual(result, .make(x: -1, y: 2, z: -3, w: 4))
     }
 
     func test_multipliedByScalarWithOperator_generatesCorrectResults() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let resultRight = tuple * 3.5
         let resultLeft = 3.5 * tuple
 
-        XCTAssertEqual(resultRight, Tuple(x: 3.5, y: -7, z: 10.5, w: -14))
-        XCTAssertEqual(resultLeft, Tuple(x: 3.5, y: -7, z: 10.5, w: -14))
+        XCTAssertEqual(resultRight, .make(x: 3.5, y: -7, z: 10.5, w: -14))
+        XCTAssertEqual(resultLeft, .make(x: 3.5, y: -7, z: 10.5, w: -14))
     }
 
     func test_multipliedByFractionWithOperator_generatesCorrectResults() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let resultRight = tuple * 0.5
         let resultLeft = 0.4 * tuple
 
-        XCTAssertEqual(resultRight, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
-        XCTAssertEqual(resultLeft, Tuple(x: 0.4, y: -0.8, z: 1.2, w: -1.6))
+        XCTAssertEqual(resultRight, .make(x: 0.5, y: -1, z: 1.5, w: -2))
+        XCTAssertEqual(resultLeft, .make(x: 0.4, y: -0.8, z: 1.2, w: -1.6))
     }
 
     func test_dividedByScalarWithOperator_scalesTupleComponents() {
-        let tuple = Tuple(x: 1, y: -2, z: 3, w: -4)
+        let tuple = Tuple.make(x: 1, y: -2, z: 3, w: -4)
 
         let result = tuple / 2
 
-        XCTAssertEqual(result, Tuple(x: 0.5, y: -1, z: 1.5, w: -2))
+        XCTAssertEqual(result, .make(x: 0.5, y: -1, z: 1.5, w: -2))
     }
 
     func test_dotProductWithOperator_returnsScalarValue() {
@@ -213,8 +213,8 @@ class TupleTests: XCTestCase {
         let result1 = vector1 +* vector2
         let result2 = vector2 +* vector1
 
-        XCTAssertEqual(result1, Tuple.vector(x: -1, y: 2, z: -1))
-        XCTAssertEqual(result2, Tuple.vector(x: 1, y: -2, z: 1))
+        XCTAssertEqual(result1, .vector(x: -1, y: 2, z: -1))
+        XCTAssertEqual(result2, .vector(x: 1, y: -2, z: 1))
     }
 
     func test_dotProductAndCrossProduct_hasCorrectPrecedence() {
@@ -226,16 +226,16 @@ class TupleTests: XCTestCase {
 
         let result = 10 * a +* b +* c .* d * e
 
-        XCTAssertEqual(result, Tuple.vector(x: -20, y: 40, z: -60))
+        XCTAssertEqual(result, .vector(x: -20, y: 40, z: -60))
     }
 
     func test_equality_considersTwoTuplesEqualWhenTheirDifferenceIsLessThanSomeEpsilonValue() {
         let samples = [
-            Tuple(x: 1.690_009, y: 3.520_009, z: 3.120_009, w: 6.920_009),
-            Tuple(x: 1.69, y: 3.52, z: 3.12, w: 6.92),
-            Tuple(x: 1.689_991, y: 3.519_991, z: 3.119_991, w: 6.919_991)
+            Tuple.make(x: 1.690_009, y: 3.520_009, z: 3.120_009, w: 6.920_009),
+            Tuple.make(x: 1.69, y: 3.52, z: 3.12, w: 6.92),
+            Tuple.make(x: 1.689_991, y: 3.519_991, z: 3.119_991, w: 6.919_991)
         ]
-        let tuple = Tuple(x: 1.69, y: 3.52, z: 3.12, w: 6.92)
+        let tuple = Tuple.make(x: 1.69, y: 3.52, z: 3.12, w: 6.92)
 
         samples.forEach { sample in
             XCTAssertEqual(tuple, sample, "Tuples should be equal when their difference is less than 1E-5 (0.00001)")
@@ -263,11 +263,11 @@ class TupleTests: XCTestCase {
     func test_normalized_returnsTupleWithMagnitudeEqualToOne() {
         let vector1 = Tuple.vector(x: 4, y: 0, z: 0)
         let normalized1 = vector1.normalized()
-        XCTAssertEqual(normalized1, Tuple.vector(x: 1, y: 0, z: 0))
+        XCTAssertEqual(normalized1, .vector(x: 1, y: 0, z: 0))
 
         let vector2 = Tuple.vector(x: 1, y: 2, z: 3)
         let normalized2 = vector2.normalized()
-        XCTAssertEqual(normalized2, Tuple.vector(x: 0.26726, y: 0.53452, z: 0.80178))
+        XCTAssertEqual(normalized2, .vector(x: 0.26726, y: 0.53452, z: 0.80178))
     }
 
     func test_magnitude_ofNormalizedVectorIsOne() {
@@ -294,7 +294,7 @@ class TupleTests: XCTestCase {
         let result1 = vector1.crossProduct(with: vector2)
         let result2 = vector2.crossProduct(with: vector1)
 
-        XCTAssertEqual(result1, Tuple.vector(x: -1, y: 2, z: -1))
-        XCTAssertEqual(result2, Tuple.vector(x: 1, y: -2, z: 1))
+        XCTAssertEqual(result1, .vector(x: -1, y: 2, z: -1))
+        XCTAssertEqual(result2, .vector(x: 1, y: -2, z: 1))
     }
 }

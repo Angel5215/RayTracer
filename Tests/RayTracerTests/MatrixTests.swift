@@ -1,4 +1,4 @@
-// Created on 28/04/23. Last modified in 2023.
+// Created on 13/05/23. Last modified in 2023.
 
 import RayTracer
 import XCTest
@@ -74,11 +74,11 @@ class MatrixTests: XCTestCase {
 
     func test_multipliedByTuple_returnsNewTuple() {
         let matrix = Matrix4(values: [1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1])
-        let tuple = Tuple(x: 1, y: 2, z: 3, w: 1)
+        let tuple = Tuple.make(x: 1, y: 2, z: 3, w: 1)
 
         let result = matrix.multiplied(by: tuple)
 
-        XCTAssertEqual(result, Tuple(x: 18, y: 24, z: 33, w: 1))
+        XCTAssertEqual(result, .make(x: 18, y: 24, z: 33, w: 1))
     }
 
     func test_multipliedByIdentityMatrix_returnsSameMatrix() {
@@ -93,7 +93,7 @@ class MatrixTests: XCTestCase {
 
     func test_identityMultipliedByTuple_returnsTheSameTuple() {
         let identity = Matrix4.identity
-        let tuple = Tuple(x: 1, y: 2, z: 3, w: 4)
+        let tuple = Tuple.make(x: 1, y: 2, z: 3, w: 4)
 
         let result = identity * tuple
 
@@ -309,10 +309,10 @@ class MatrixTests: XCTestCase {
 
     func test_multipliedByTupleWithOperator_returnsNewTuple() {
         let matrix = Matrix4(values: [1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1])
-        let tuple = Tuple(x: 1, y: 2, z: 3, w: 1)
+        let tuple = Tuple.make(x: 1, y: 2, z: 3, w: 1)
 
         let result = matrix * tuple
 
-        XCTAssertEqual(result, Tuple(x: 18, y: 24, z: 33, w: 1))
+        XCTAssertEqual(result, .make(x: 18, y: 24, z: 33, w: 1))
     }
 }
